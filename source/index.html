@@ -167,7 +167,6 @@ button,input,textarea{font-family:inherit}
     <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
       <sc-for list="{{ overviewCards }}" as="c" hint-placeholder-count="3">
         <a href="{{ c.href }}" sc-camel-on-click="{{ c.go }}" style="display:flex;flex-direction:column;gap:16px;padding:clamp(28px,3vw,36px);min-height:260px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE2EA;box-shadow:0 2px 14px rgba(25,29,55,.06);color:#191D37;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(25,29,55,.35);border-color:#456794">
-          <span style="display:flex;align-items:center;gap:12px;min-height:24px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#456794"><sc-if value="{{ c.soon }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;padding:4px 9px;border:1px solid #DCE2EA;border-radius:999px;color:#4A5068">{{ c.hint }}</span></sc-if></span>
           <span style="font-size:clamp(26px,2.6vw,32px);font-weight:600;letter-spacing:-.025em;line-height:1.1">{{ c.title }}</span>
           <span style="font-size:15px;line-height:1.6;color:#3A4060;text-wrap:pretty">{{ c.lead }}</span>
           <span style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#456794">{{ t.home.discover }} <span aria-hidden="true">→</span></span>
