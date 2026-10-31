@@ -349,6 +349,26 @@ button,input,textarea{font-family:inherit}
   </section>
 </sc-if>
 
+<sc-if value="{{ showLegal }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Pages légales" style="background:#FFFFFF;padding:clamp(140px,15vw,180px) clamp(20px,4vw,48px) clamp(80px,10vw,128px)">
+    <div style="max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <p style="margin:0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#456794"><span style="width:26px;height:3px;background:#456794;transform:skewX(-22deg)"></span>{{ legalPage.eyebrow }}</p>
+        <h1 style="margin:0;font-size:clamp(34px,4.6vw,56px);line-height:1.06;font-weight:600;letter-spacing:-.035em;color:#191D37">{{ legalPage.title }}</h1>
+        <p style="margin:0;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:#4A5068">{{ legalPage.updated }}</p>
+      </div>
+      <sc-for list="{{ legalPage.sections }}" as="sec" hint-placeholder-count="4">
+        <div style="display:flex;flex-direction:column;gap:12px;padding-top:28px;border-top:1px solid #E6EAF0">
+          <h2 style="margin:0;font-size:20px;font-weight:600;letter-spacing:-.01em;color:#191D37">{{ sec.h }}</h2>
+          <sc-for list="{{ sec.p }}" as="line" hint-placeholder-count="2">
+            <p style="margin:0;font-size:15.5px;line-height:1.7;color:#2C3150;overflow-wrap:anywhere">{{ line }}</p>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
 <section id="contact" data-screen-label="Contact" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px);scroll-margin-top:76px">
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(163,178,199,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(163,178,199,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none"></div>
   <div style="position:relative;max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
@@ -396,7 +416,7 @@ button,input,textarea{font-family:inherit}
       </div>
     </div>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:24px;border-top:1px solid rgba(163,178,199,.14);font-size:12.5px;color:#A3B2C7">
-      <span>© 2026 EidosFlow. {{ t.footer.rights }}</span>
+      <span style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px"><span>© 2026 EidosFlow. {{ t.footer.rights }}</span><a href="{{ hrefs.legal }}" sc-camel-on-click="{{ go.legal }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.legal }}</a><a href="{{ hrefs.privacy }}" sc-camel-on-click="{{ go.privacy }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.privacy }}</a></span>
       <a href="#" sc-camel-on-click="{{ toTop }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.top }}</a>
     </div>
   </div>
@@ -407,8 +427,8 @@ button,input,textarea{font-family:inherit}
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;showReview&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Relecture&quot;}}">
 class Component extends DCLogic {
   static SLUGS = {
-    fr: { home: '', capabilities: 'savoir-faire', blog: 'blog', about: 'a-propos' },
-    en: { home: '', capabilities: 'capabilities', blog: 'blog', about: 'about' }
+    fr: { home: '', capabilities: 'savoir-faire', blog: 'blog', about: 'a-propos', legal: 'mentions-legales', privacy: 'confidentialite' },
+    en: { home: '', capabilities: 'capabilities', blog: 'blog', about: 'about', legal: 'legal-notice', privacy: 'privacy' }
   };
   static DSLUG = { fr: { cyber: 'cybersecurite', data: 'data', ai: 'ia' }, en: { cyber: 'cybersecurity', data: 'data', ai: 'ai' } };
   static POSTS = [{
@@ -542,7 +562,9 @@ class Component extends DCLogic {
         nazimeBio: 'Plus de 8 ans de conseil en cybersécurité auprès de grands clients : évaluations GRC, tests d’intrusion, revues de sécurité cloud et audits d’architecture.'
       },
       cta: { copy: 'Copier l’adresse', copied: 'Adresse copiée ✓', subject: 'Demande d’échange — projet d’accompagnement', title: 'Parlons de votre projet.', lead: 'Décrivez-nous votre besoin en quelques lignes ; nous revenons vers vous pour en discuter.' },
-      footer: { follow: 'Suivez-nous', rights: 'Tous droits réservés.', top: 'Haut de page' }
+      footer: { follow: 'Suivez-nous', rights: 'Tous droits réservés.', top: 'Haut de page', legal: 'Mentions légales', privacy: 'Confidentialité' },
+      legalDoc: {"eyebrow": "Informations légales", "title": "Mentions légales", "updated": "Dernière mise à jour : [à compléter]", "sections": [{"h": "Éditeur du site", "p": ["Raison sociale : EidosFlow", "Forme juridique : [à compléter] (ex. SAS, SARL…)", "Capital social : [à compléter] €", "Siège social : [à compléter]", "Immatriculation : RCS [à compléter] — SIREN [à compléter]", "N° de TVA intracommunautaire : [à compléter]", "Email : contact@eidosflow.com", "Téléphone : [à compléter]"]}, {"h": "Directeur de la publication", "p": ["[à compléter] (nom et fonction)"]}, {"h": "Hébergement", "p": ["Le site est hébergé par GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis — https://github.com"]}, {"h": "Propriété intellectuelle", "p": ["L’ensemble des contenus de ce site (textes, visuels, logo, charte graphique) est la propriété d’EidosFlow, sauf mention contraire. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable est interdite.", "Les logos des références clients restent la propriété de leurs titulaires respectifs et sont présentés à titre de références."]}, {"h": "Données personnelles", "p": ["Les informations relatives au traitement de vos données personnelles figurent dans notre politique de confidentialité, accessible en bas de chaque page."]}]},
+      privacyDoc: {"eyebrow": "Informations légales", "title": "Politique de confidentialité", "updated": "Dernière mise à jour : [à compléter]", "sections": [{"h": "Responsable du traitement", "p": ["EidosFlow, [à compléter] (adresse du siège) — contact@eidosflow.com"]}, {"h": "Données que nous collectons", "p": ["Ce site ne comporte ni formulaire, ni espace client, ni inscription.", "Si vous nous écrivez par email, nous recevons votre nom, votre adresse email et le contenu de votre message. Ces données servent uniquement à vous répondre et, le cas échéant, à préparer une proposition commerciale (base légale : notre intérêt légitime à répondre aux demandes et les mesures précontractuelles prises à votre demande).", "Elles sont conservées [à compléter] (ex. 3 ans) à compter de notre dernier échange, puis supprimées. Elles ne sont ni vendues ni cédées à des tiers."]}, {"h": "Hébergement et journaux techniques", "p": ["Notre hébergeur, GitHub, Inc., enregistre l’adresse IP des visiteurs dans ses journaux techniques afin d’assurer la sécurité et le bon fonctionnement du service. GitHub étant situé aux États-Unis, ces données peuvent y être transférées dans le cadre des garanties décrites dans la déclaration de confidentialité de GitHub (https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement)."]}, {"h": "Cookies et mesure d’audience", "p": ["Ce site ne dépose aucun cookie publicitaire ni traceur de réseaux sociaux.", "Mesure d’audience : [à compléter] (nom de l’outil). Cet outil fonctionne sans cookie et produit des statistiques anonymes (pages consultées, pays, type d’appareil, site de provenance) qui ne permettent pas de vous identifier."]}, {"h": "Vos droits", "p": ["Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement, d’opposition, de limitation et de portabilité de vos données. Pour les exercer, écrivez-nous à contact@eidosflow.com.", "Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (www.cnil.fr)."]}]}
     },
     en: {
       review: 'To validate',
@@ -595,7 +617,9 @@ class Component extends DCLogic {
         nazimeBio: 'Over 8 years in cybersecurity consulting, I have helped major clients assess and strengthen their security through GRC assessments, penetration testing, cloud security reviews and architecture audits.'
       },
       cta: { copy: 'Copy address', copied: 'Address copied ✓', subject: 'Request for a discussion — advisory project', title: 'Let’s talk about your project.', lead: 'Tell us about your need in a few lines and we’ll get back to you to discuss it.' },
-      footer: { follow: 'Follow us', rights: 'All rights reserved.', top: 'Back to top' }
+      footer: { follow: 'Follow us', rights: 'All rights reserved.', top: 'Back to top', legal: 'Legal notice', privacy: 'Privacy' },
+      legalDoc: {"eyebrow": "Legal information", "title": "Legal notice", "updated": "Last updated: [to be completed]", "sections": [{"h": "Website publisher", "p": ["Company name: EidosFlow", "Legal form: [to be completed] (e.g. SAS, SARL…)", "Share capital: €[to be completed]", "Registered office: [to be completed]", "Registration: RCS [to be completed] — SIREN [to be completed]", "EU VAT number: [to be completed]", "Email: contact@eidosflow.com", "Phone: [to be completed]"]}, {"h": "Publication director", "p": ["[to be completed] (name and title)"]}, {"h": "Hosting", "p": ["This website is hosted by GitHub, Inc. (GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, United States — https://github.com"]}, {"h": "Intellectual property", "p": ["All content on this website (text, visuals, logo, brand identity) is the property of EidosFlow unless stated otherwise. Any full or partial reproduction without prior written consent is prohibited.", "Client logos remain the property of their respective owners and are shown as references."]}, {"h": "Personal data", "p": ["Information on how we process your personal data is available in our privacy policy, linked at the bottom of every page."]}]},
+      privacyDoc: {"eyebrow": "Legal information", "title": "Privacy policy", "updated": "Last updated: [to be completed]", "sections": [{"h": "Data controller", "p": ["EidosFlow, [to be completed] (registered address) — contact@eidosflow.com"]}, {"h": "Data we collect", "p": ["This website has no forms, no customer area and no sign-up.", "If you email us, we receive your name, email address and the content of your message. This data is used only to reply to you and, where relevant, to prepare a proposal (legal basis: our legitimate interest in answering requests and pre-contractual steps taken at your request).", "It is kept for [to be completed] (e.g. 3 years) after our last exchange, then deleted. It is never sold or shared with third parties."]}, {"h": "Hosting and technical logs", "p": ["Our host, GitHub, Inc., records visitors’ IP addresses in its technical logs to keep the service secure and running. As GitHub is based in the United States, this data may be transferred there under the safeguards described in GitHub’s privacy statement (https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement)."]}, {"h": "Cookies and audience measurement", "p": ["This website sets no advertising cookies and no social media trackers.", "Audience measurement: [to be completed] (tool name). This tool works without cookies and produces anonymous statistics (pages viewed, country, device type, referring site) that cannot identify you."]}, {"h": "Your rights", "p": ["Under the GDPR, you have the right to access, rectify, erase, object to, restrict and port your data. To exercise these rights, email us at contact@eidosflow.com.", "If you believe your rights have not been respected, you may lodge a complaint with the CNIL (www.cnil.fr), the French data protection authority."]}]}
     }
   };
 
@@ -752,13 +776,16 @@ class Component extends DCLogic {
     ['home', ...pages].forEach((p) => { hrefs[p] = this.href(p); go[p] = this.nav(p); });
     if (!this._cv) this._cv = React.createElement('canvas', { ref: this.canvasRef, 'aria-hidden': 'true', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, #000 35%)', maskImage: 'linear-gradient(180deg, transparent 0%, #000 35%)' } });
     const pg = {}; ['home', ...pages].forEach((p) => (pg[p] = page === p));
+    ['legal', 'privacy'].forEach((p) => { hrefs[p] = this.href(p); go[p] = this.nav(p); pg[p] = page === p; });
+    const showLegal = page === 'legal' || page === 'privacy';
+    const legalPage = page === 'privacy' ? t.privacyDoc : t.legalDoc;
     const isMobile = w < 960;
     const offers = t.svc.offers.map((o, i) => ({ ...o, n: String(i + 1).padStart(2, '0'), showTag: !!o.review && showReview }));
     const social = (cfg.social || [
       { key: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/company/eidosflow/' }
     ]).filter((s) => s && s.label).map((s) => ({ label: s.label, url: s.url || null, inactive: !s.url, icon: s.icon || Component.ICONS[s.key] || '' }));
     return {
-      t, pos, pg, hrefs, go, dom, domainLinks, capOverview, capDetail, overviewCards, post, blogPost, blogList, logoMarquee, refTexture: this._tex,
+      t, pos, pg, hrefs, go, showLegal, legalPage, dom, domainLinks, capOverview, capDetail, overviewCards, post, blogPost, blogList, logoMarquee, refTexture: this._tex,
       mailHref: 'mailto:contact@eidosflow.com?subject=' + encodeURIComponent(t.cta.subject),
       openMail: (e) => {
         const href = 'mailto:contact@eidosflow.com?subject=' + encodeURIComponent(t.cta.subject);
