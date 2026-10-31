@@ -62,11 +62,7 @@ button,input,textarea{font-family:inherit}
       </nav>
     </sc-if>
     <div style="display:flex;align-items:center;gap:12px;flex:none">
-      <button type="button" sc-camel-on-click="{{ toggleLang }}" aria-label="{{ langAria }}" title="{{ langAria }}" style="position:relative;display:flex;gap:0;padding:3px;margin-left:8px;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;cursor:pointer" style-hover="border-color:rgba(163,178,199,.7)">
-        <span aria-hidden="true" style="position:absolute;top:3px;left:3px;width:38px;height:30px;border-radius:999px;background:#FFFFFF;transform:translateX({{ langKnob }});transition:transform .25s ease"></span>
-        <span aria-hidden="true" style="position:relative;width:38px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:{{ frFg }};transition:color .25s">FR</span>
-        <span aria-hidden="true" style="position:relative;width:38px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;color:{{ enFg }};transition:color .25s">EN</span>
-      </button>
+      <button type="button" sc-camel-on-click="{{ toggleLang }}" aria-label="{{ langAria }}" title="{{ langAria }}" style="margin-left:8px;width:52px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.08em;color:#FFFFFF" style-hover="border-color:#A3B2C7;background:rgba(163,178,199,.12)">{{ langLabel }}</button>
       <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
         <button type="button" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-label="Menu" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(163,178,199,.35);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
           <span style="width:18px;height:2px;background:#FFFFFF"></span><span style="width:18px;height:2px;background:#FFFFFF"></span><span style="width:12px;height:2px;margin-left:6px;background:#A3B2C7"></span>
@@ -794,7 +790,7 @@ class Component extends DCLogic {
       frBg: lang === 'fr' ? '#FFFFFF' : 'transparent', frFg: lang === 'fr' ? '#191D37' : '#E4E8EF',
       enBg: lang === 'en' ? '#FFFFFF' : 'transparent', enFg: lang === 'en' ? '#191D37' : '#E4E8EF',
       setFr: this.nav(page, 'fr'), setEn: this.nav(page, 'en'),
-      toggleLang: this.nav(page, lang === 'fr' ? 'en' : 'fr'), langKnob: lang === 'fr' ? '0' : '38px',
+      toggleLang: this.nav(page, lang === 'fr' ? 'en' : 'fr'), langLabel: lang === 'fr' ? 'FR' : 'EN',
       langAria: lang === 'fr' ? 'Switch to English' : 'Passer en français',
       toTop: (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     };
