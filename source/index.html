@@ -70,13 +70,13 @@ button,input,textarea{font-family:inherit}
 .cy-ghost:hover{border-color:#FFFFFF;color:#FFFFFF}
 .cy-offers{margin-top:28px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 @media (max-width:760px){.cy-offers{grid-template-columns:1fr}}
-.cy-offer{display:flex;flex-direction:column;padding:32px 32px 28px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE2EA;border-top:3px solid #191D37;transition:border-color .2s,box-shadow .2s,transform .2s}
+.cy-offer{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:0;align-content:start;padding:32px 32px 28px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE2EA;border-top:3px solid #191D37;transition:border-color .2s,box-shadow .2s,transform .2s}
 .cy-offer:hover{border-color:#A3B2C7;border-top-color:#456794;box-shadow:0 18px 40px -24px rgba(25,29,55,.45);transform:translateY(-2px)}
 .cy-offer h3{margin:0;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.01em;color:#191D37}
 .cy-pts{margin:18px 0 0;padding:0;list-style:none}
 .cy-pts li{position:relative;padding:7px 0 7px 20px;font-size:15.5px;line-height:1.5;color:#2C3150}
 .cy-pts li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:2px;background:#456794}
-.cy-out{margin:auto 0 0;padding-top:20px;font-size:14px;line-height:1.55;font-weight:500;color:#2C3150}
+.cy-out{margin:0;align-self:start;padding-top:20px;font-size:14px;line-height:1.55;font-weight:500;color:#2C3150}
 .cy-out .cy-lbl{display:block;margin:0 0 6px;padding-top:16px;border-top:1px solid #DCE2EA;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#456794}
 .cy-steps{margin:48px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
 .cy-steps li{position:relative;padding:26px 26px 0 0;border-top:2px solid #DCE2EA}
