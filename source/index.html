@@ -70,9 +70,11 @@ button,input,textarea{font-family:inherit}
 .cy-ghost:hover{border-color:#FFFFFF;color:#FFFFFF}
 .cy-offers{margin-top:28px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 @media (max-width:760px){.cy-offers{grid-template-columns:1fr}}
-.cy-offer{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:0;align-content:start;padding:32px 32px 28px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE2EA;border-top:3px solid #191D37;transition:border-color .2s,box-shadow .2s,transform .2s}
+.cy-offer{display:grid;grid-template-rows:subgrid;grid-row:span 4;row-gap:0;align-content:start;padding:32px 32px 28px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE2EA;border-top:3px solid #191D37;transition:border-color .2s,box-shadow .2s,transform .2s}
 .cy-offer:hover{border-color:#A3B2C7;border-top-color:#456794;box-shadow:0 18px 40px -24px rgba(25,29,55,.45);transform:translateY(-2px)}
 .cy-offer h3{margin:0;font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.01em;color:#191D37}
+.cy-sum{margin:12px 0 0;font-size:16px;line-height:1.55;color:#456794}
+.cy-pts strong{font-weight:600;color:#191D37}
 .cy-pts{margin:18px 0 0;padding:0;list-style:none}
 .cy-pts li{position:relative;padding:7px 0 7px 20px;font-size:15.5px;line-height:1.5;color:#2C3150}
 .cy-pts li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:2px;background:#456794}
@@ -314,8 +316,9 @@ button,input,textarea{font-family:inherit}
         <sc-for list="{{ t.cyber.offers }}" as="o" hint-placeholder-count="4">
           <article class="cy-offer">
             <h3>{{ o.title }}</h3>
+            <p class="cy-sum">{{ o.sum }}</p>
             <ul class="cy-pts">
-              <sc-for list="{{ o.items }}" as="it" hint-placeholder-count="4"><li>{{ it }}</li></sc-for>
+              <sc-for list="{{ o.items }}" as="it" hint-placeholder-count="4"><li>{{ it.t }}<strong>{{ it.b }}</strong>{{ it.c }}</li></sc-for>
             </ul>
             <p class="cy-out"><span class="cy-lbl">{{ t.cyber.delivLabel }}</span>{{ o.deliv }}</p>
           </article>
@@ -660,10 +663,10 @@ class Component extends DCLogic {
         cta: 'Parlez-nous de votre projet', ctaOffers: 'Voir les offres',
         offersLabel: 'Nos offres', delivLabel: 'Livrable',
         offers: [
-          { title: 'Test d’intrusion interne', items: ['Scénario : attaquant déjà présent (poste piégé, prestataire, employé malveillant)', 'Active Directory', 'Partages réseau, postes et serveurs', 'Segmentation et Wi-Fi', 'Mots de passe'], deliv: 'Chemins d’attaque démontrés et plan de correction priorisé.' },
-          { title: 'Sécurité des applications', items: ['Tests d’intrusion web et API', 'Applications mobiles Android et iOS', 'Revue de code, de configuration ou d’architecture', 'Avant mise en production ou sur l’existant'], deliv: 'Chaque faille démontrée, expliquée et accompagnée de sa correction.' },
-          { title: 'Diagnostic cyber PME', items: ['Comptes, droits d’accès et MFA', 'Microsoft 365 / Google Workspace', 'Messagerie, domaines et DNS', 'Hébergement, cloud et exposition Internet', 'Postes et sauvegardes'], deliv: 'État des lieux et 10 actions prioritaires, classées par effort et par impact. Réalisé en quelques jours.' },
-          { title: 'Accompagnement mensuel', items: ['Surveillance de votre Active Directory', 'Surveillance de vos environnements cloud : OVH, AWS, Microsoft 365', 'Alerte dès qu’un problème de sécurité est détecté', 'Sessions de sensibilisation pour vos équipes et vos dirigeants'], deliv: 'Une alerte à chaque problème détecté, avec la correction à appliquer.' }
+          { title: "Test d’intrusion interne", sum: "Nous simulons un attaquant déjà présent sur votre réseau pour mesurer jusqu’où il peut aller.", items: [{ t: "Tests de votre environnement ", b: "Active Directory", c: "" }, { t: "Tests d’intrusion du réseau interne : serveurs et services exposés", b: "", c: "" }, { t: "Sécurité des postes de travail : élévation de privilèges, contournement des protections", b: "", c: "" }, { t: "Segmentation réseau et sécurité Wi-Fi", b: "", c: "" }, { t: "Robustesse des mots de passe : session de cassage des empreintes récupérées", b: "", c: "" }, { t: "Scénarios adaptés à votre contexte : applications cœur de métier, données sensibles", b: "", c: "" }], deliv: "Les chemins d’attaque démontrés et un plan de remédiation priorisé." },
+          { title: "Sécurité des applications", sum: "Nous vérifions la sécurité de vos applications web, mobiles et API, avant leur mise en production ou sur l’existant.", items: [{ t: "Tests d’intrusion en boîte grise ou en boîte blanche", b: "", c: "" }, { t: "Analyse du code source, statique et dynamique", b: "", c: "" }, { t: "Revue d’architecture", b: "", c: "" }, { t: "Revue de configuration : serveurs Linux et Windows, bases de données MySQL et SQL Server, serveurs web Apache, Nginx et IIS", b: "", c: "" }], deliv: "Chaque vulnérabilité démontrée, classée par criticité et accompagnée de sa correction." },
+          { title: "Diagnostic cyber PME", sum: "Nous évaluons votre posture de sécurité globale, sur les outils que vous utilisez au quotidien.", items: [{ t: "Noms de domaine et DNS, protection de la messagerie contre l’usurpation", b: "", c: "" }, { t: "Outils collaboratifs : Microsoft 365 ou Google Workspace", b: "", c: "" }, { t: "Environnements cloud : Azure, AWS", b: "", c: "" }, { t: "Gestion des postes de travail : mises à jour, antivirus, chiffrement, droits administrateur", b: "", c: "" }, { t: "DevOps : dépôts de code GitHub ou GitLab, chaînes CI/CD, gestion des secrets", b: "", c: "" }], deliv: "Un état des lieux de chaque domaine et une feuille de route des actions à mener, par ordre de priorité." },
+          { title: "Surveillance continue", sum: "Nous gardons un œil sur vos configurations pour repérer les failles dès qu’elles apparaissent.", items: [{ t: "Revue récurrente de vos configurations", b: "", c: "" }, { t: "Surveillance de votre ", b: "Active Directory", c: " et de vos environnements cloud : OVH, AWS, Microsoft 365" }, { t: "Rapport hebdomadaire ou mensuel", b: "", c: "" }, { t: "Alerte en cas de défaut de configuration majeur ou critique", b: "", c: "" }], deliv: "Une vision à jour de votre niveau de sécurité, et chaque défaut détecté accompagné de sa correction." }
         ],
         methodLabel: 'Notre méthode', methodTitle: 'Du cadrage au suivi, un interlocuteur unique.',
         steps: [
@@ -737,10 +740,10 @@ class Component extends DCLogic {
         cta: 'Tell us about your project', ctaOffers: 'See our offers',
         offersLabel: 'Our offers', delivLabel: 'Deliverable',
         offers: [
-          { title: 'Internal penetration test', items: ['Scenario: attacker already inside (compromised workstation, contractor, malicious employee)', 'Active Directory', 'Network shares, workstations and servers', 'Segmentation and Wi-Fi', 'Passwords'], deliv: 'Demonstrated attack paths and a prioritised remediation plan.' },
-          { title: 'Application security', items: ['Web and API penetration testing', 'Android and iOS mobile apps', 'Code, configuration or architecture review', 'Before go-live or on existing applications'], deliv: 'Every vulnerability demonstrated, explained and paired with its fix.' },
-          { title: 'SME cyber assessment', items: ['Accounts, access rights and MFA', 'Microsoft 365 / Google Workspace', 'Email, domains and DNS', 'Hosting, cloud and internet exposure', 'Workstations and backups'], deliv: 'A clear baseline and 10 priority actions, ranked by effort and impact. Delivered in a few days.' },
-          { title: 'Monthly support', items: ['Monitoring of your Active Directory', 'Monitoring of your cloud environments: OVH, AWS, Microsoft 365', 'Alert as soon as a security issue is detected', 'Awareness sessions for your teams and leadership'], deliv: 'An alert for every issue detected, with the fix to apply.' }
+          { title: "Internal penetration test", sum: "We simulate an attacker already inside your network to measure how far they can go.", items: [{ t: "Testing of your ", b: "Active Directory", c: " environment" }, { t: "Internal network penetration testing: servers and exposed services", b: "", c: "" }, { t: "Workstation security: privilege escalation, bypassing protections", b: "", c: "" }, { t: "Network segmentation and Wi-Fi security", b: "", c: "" }, { t: "Password strength: cracking session on recovered hashes", b: "", c: "" }, { t: "Scenarios tailored to your context: business-critical applications, sensitive data", b: "", c: "" }], deliv: "Demonstrated attack paths and a prioritised remediation plan." },
+          { title: "Application security", sum: "We assess the security of your web and mobile applications and APIs, before go-live or once in production.", items: [{ t: "Grey-box or white-box penetration testing", b: "", c: "" }, { t: "Source code analysis, static and dynamic", b: "", c: "" }, { t: "Architecture review", b: "", c: "" }, { t: "Configuration review: Linux and Windows servers, MySQL and SQL Server databases, Apache, Nginx and IIS web servers", b: "", c: "" }], deliv: "Every vulnerability demonstrated, rated by severity and paired with its fix." },
+          { title: "SME cyber assessment", sum: "We assess your overall security posture across the tools you use every day.", items: [{ t: "Domain names and DNS, email protection against spoofing", b: "", c: "" }, { t: "Collaboration tools: Microsoft 365 or Google Workspace", b: "", c: "" }, { t: "Cloud environments: Azure, AWS", b: "", c: "" }, { t: "Workstation management: updates, antivirus, encryption, admin rights", b: "", c: "" }, { t: "DevOps: GitHub or GitLab repositories, CI/CD pipelines, secrets management", b: "", c: "" }], deliv: "An assessment of each area and a roadmap of actions, in order of priority." },
+          { title: "Continuous monitoring", sum: "We keep watch over your configurations to catch weaknesses as soon as they appear.", items: [{ t: "Recurring review of your configurations", b: "", c: "" }, { t: "Monitoring of your ", b: "Active Directory", c: " and cloud environments: OVH, AWS, Microsoft 365" }, { t: "Weekly or monthly report", b: "", c: "" }, { t: "Alert for any major or critical misconfiguration", b: "", c: "" }], deliv: "An up-to-date view of your security level, and every issue detected paired with its fix." }
         ],
         methodLabel: 'Our approach', methodTitle: 'From scoping to follow-up, a single point of contact.',
         steps: [
