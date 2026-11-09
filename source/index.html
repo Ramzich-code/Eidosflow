@@ -80,11 +80,29 @@ button,input,textarea{font-family:inherit}
 .cy-pts li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:2px;background:#456794}
 .cy-out{margin:0;align-self:start;padding-top:20px;font-size:14px;line-height:1.55;font-weight:500;color:#2C3150}
 .cy-out .cy-lbl{display:block;margin:0 0 6px;padding-top:16px;border-top:1px solid #DCE2EA;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#456794}
-.cy-steps{margin:48px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
-.cy-steps li{position:relative;padding:26px 26px 0 0;border-top:2px solid #DCE2EA}
-.cy-steps li::before{content:"";position:absolute;top:-2px;left:0;width:44px;border-top:2px solid #191D37}
-.cy-steps h3{margin:0;font-size:19px;font-weight:600;color:#191D37}
+.cy-steps{margin:48px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));counter-reset:cystep}
+.cy-steps li{position:relative;padding:22px 26px 8px 0;counter-increment:cystep;cursor:default}
+.cy-steps li::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:#DCE2EA}
+.cy-steps li::after{content:"";position:absolute;top:0;left:0;width:44px;height:2px;background:#191D37;transition:width .45s cubic-bezier(.2,.7,.2,1),background-color .3s}
+.cy-steps .cy-num{display:block;margin:0 0 10px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;color:#A3B2C7;transition:color .3s}
+.cy-steps .cy-num::before{content:"0" counter(cystep)}
+.cy-steps h3{margin:0;font-size:19px;font-weight:600;color:#191D37;transition:color .3s}
 .cy-steps p{margin:8px 0 0;font-size:15px;line-height:1.6;color:#2C3150}
+.cy-steps li:hover::after{width:100%;background:#456794}
+.cy-steps li:hover .cy-num,.cy-steps li:hover h3{color:#456794}
+/* Apparition au défilement : la ligne se trace d'une étape à l'autre */
+.cy-steps[data-anim] li::before{transform:scaleX(0);transform-origin:left}
+.cy-steps[data-anim] li::after{width:0}
+.cy-steps[data-anim] li .cy-num,.cy-steps[data-anim] li h3,.cy-steps[data-anim] li p{opacity:0;transform:translateY(12px)}
+.cy-steps[data-anim][data-in] li::before{transform:scaleX(1);transition:transform .5s cubic-bezier(.4,0,.2,1) calc(var(--i) * .5s)}
+.cy-steps[data-anim][data-in] li::after{animation:cy-mark .45s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .5s + .1s) both}
+.cy-steps[data-anim][data-in] li .cy-num,.cy-steps[data-anim][data-in] li h3,.cy-steps[data-anim][data-in] li p{opacity:1;transform:none;transition:opacity .5s ease calc(var(--i) * .5s + .2s),transform .5s cubic-bezier(.2,.7,.2,1) calc(var(--i) * .5s + .2s),color .3s}
+.cy-steps[data-anim][data-in] li p{transition-delay:calc(var(--i) * .5s + .3s),calc(var(--i) * .5s + .3s),0s}
+.cy-steps[data-anim][data-in][data-done] li::after{animation:none;width:44px}
+.cy-steps[data-anim][data-in][data-done] li:hover::after{width:100%}
+@keyframes cy-mark{from{width:0}to{width:44px}}
+.cy-steps li:nth-child(1){--i:0}.cy-steps li:nth-child(2){--i:1}.cy-steps li:nth-child(3){--i:2}.cy-steps li:nth-child(4){--i:3}
+@media (prefers-reduced-motion:reduce){.cy-steps li::after,.cy-steps .cy-num,.cy-steps h3{transition:none}}
 .cy-team{margin-top:0;max-width:760px}
 .cy-team p.cy-bio{margin:18px 0 0;font-size:16.5px;line-height:1.7;color:#2C3150}
 .cy-certs-label{margin:28px 0 0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#456794}
@@ -331,7 +349,7 @@ button,input,textarea{font-family:inherit}
       <p class="cy-eyebrow">{{ t.cyber.methodLabel }}</p>
       <h2 class="cy-title">{{ t.cyber.methodTitle }}</h2>
       <ol class="cy-steps">
-        <sc-for list="{{ t.cyber.steps }}" as="s" hint-placeholder-count="4"><li><h3>{{ s.t }}</h3><p>{{ s.d }}</p></li></sc-for>
+        <sc-for list="{{ t.cyber.steps }}" as="s" hint-placeholder-count="4"><li><span class="cy-num" aria-hidden="true"></span><h3>{{ s.t }}</h3><p>{{ s.d }}</p></li></sc-for>
       </ol>
     </div>
   </section>
@@ -795,6 +813,7 @@ class Component extends DCLogic {
     this._resize();
     if (!window.EIDOSFLOW_CONFIG) setTimeout(() => this.forceUpdate(), 400);
     this.startCanvas();
+    this.watchSteps();
     this._key = (e) => { if (e.key === 'Escape' && this.state.dropdown) this.setState({ dropdown: false }); };
     window.addEventListener('keydown', this._key);
   }
@@ -843,7 +862,31 @@ class Component extends DCLogic {
     };
     this._raf = requestAnimationFrame(loop);
   }
+  componentDidUpdate() {
+    this.watchSteps();
+  }
+  watchSteps() {
+    // La section « Notre méthode » s'anime quand elle arrive à l'écran
+    if (typeof IntersectionObserver === 'undefined') return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!this._stepsObs) {
+      this._stepsObs = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target;
+          el.setAttribute('data-in', '');
+          this._stepsObs.unobserve(el);
+          setTimeout(() => el.setAttribute('data-done', ''), 2400);
+        });
+      }, { threshold: 0.35 });
+    }
+    document.querySelectorAll('.cy-steps:not([data-anim])').forEach((el) => {
+      el.setAttribute('data-anim', '');
+      this._stepsObs.observe(el);
+    });
+  }
   componentWillUnmount() {
+    if (this._stepsObs) this._stepsObs.disconnect();
     this._dead = true; cancelAnimationFrame(this._raf); window.removeEventListener('keydown', this._key);
     window.removeEventListener('hashchange', this._hash);
     window.removeEventListener('resize', this._resize);
