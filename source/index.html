@@ -80,7 +80,10 @@ button,input,textarea{font-family:inherit}
 .cy-pts li::before{content:"";position:absolute;left:0;top:15px;width:8px;height:2px;background:#456794}
 .cy-out{margin:0;align-self:start;padding-top:20px;font-size:14px;line-height:1.55;font-weight:500;color:#2C3150}
 .cy-out .cy-lbl{display:block;margin:0 0 6px;padding-top:16px;border-top:1px solid #DCE2EA;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:#456794}
-.cy-steps{margin:48px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));counter-reset:cystep}
+.cy-approach{max-width:820px}
+.cy-intro{max-width:760px;margin:16px 0 0;font-size:16.5px;line-height:1.7;color:#2C3150}
+.cy-intro strong{font-weight:600;color:#191D37}
+.cy-steps{margin:40px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));counter-reset:cystep}
 .cy-steps li{position:relative;padding:22px 26px 8px 0;counter-increment:cystep;cursor:default}
 .cy-steps li::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:#DCE2EA}
 .cy-steps li::after{content:"";position:absolute;top:0;left:0;width:44px;height:2px;background:#191D37;transition:width .45s cubic-bezier(.2,.7,.2,1),background-color .3s}
@@ -347,7 +350,9 @@ button,input,textarea{font-family:inherit}
   <section class="cy-sec">
     <div class="cy-wrap">
       <p class="cy-eyebrow">{{ t.cyber.methodLabel }}</p>
-      <h2 class="cy-title">{{ t.cyber.methodTitle }}</h2>
+      <h2 class="cy-title cy-approach">{{ t.cyber.methodTitle }}</h2>
+      <p class="cy-intro">{{ t.cyber.methodText }}</p>
+      <p class="cy-intro"><strong>{{ t.cyber.methodKey }}</strong> {{ t.cyber.methodAxes }}</p>
       <ol class="cy-steps">
         <sc-for list="{{ t.cyber.steps }}" as="s" hint-placeholder-count="4"><li><span class="cy-num" aria-hidden="true"></span><h3>{{ s.t }}</h3><p>{{ s.d }}</p></li></sc-for>
       </ol>
@@ -677,7 +682,7 @@ class Component extends DCLogic {
         soon: 'Expertises et offres de services à venir.'
       },
       cyber: {
-        lead: 'Savoir où vous êtes exposés, décider quoi corriger en premier, et vous accompagner pour le faire.',
+        lead: 'Le meilleur moment pour découvrir une faille, c’est avant qu’elle ne soit exploitée.',
         cta: 'Parlez-nous de votre projet', ctaOffers: 'Voir les offres',
         offersLabel: 'Nos offres', delivLabel: 'Livrable',
         offers: [
@@ -686,12 +691,14 @@ class Component extends DCLogic {
           { title: "Diagnostic cyber PME", sum: "Nous évaluons votre posture de sécurité globale, sur les outils que vous utilisez au quotidien.", items: [{ t: "Noms de domaine et DNS chez OVH ou votre hébergeur, protection de la messagerie contre l’usurpation", b: "", c: "" }, { t: "Outils collaboratifs : Microsoft 365 ou Google Workspace", b: "", c: "" }, { t: "Gestion des environnements cloud : Azure, AWS", b: "", c: "" }, { t: "Gestion des postes de travail : mises à jour, antivirus, chiffrement, droits administrateur", b: "", c: "" }, { t: "DevOps : dépôts de code GitHub ou GitLab, chaînes CI/CD, gestion des secrets", b: "", c: "" }], deliv: "Un état des lieux de chaque domaine et une feuille de route des actions à mener, par ordre de priorité." },
           { title: "Security Monitoring", sum: "Nous gardons un œil sur vos configurations pour repérer les failles dès qu’elles apparaissent.", items: [{ t: "Revue récurrente de vos configurations", b: "", c: "" }, { t: "Surveillance de votre ", b: "Active Directory", c: " et de vos environnements cloud : OVH, AWS, Microsoft 365" }, { t: "Rapport hebdomadaire ou mensuel", b: "", c: "" }, { t: "Alerte en cas de défaut de configuration majeur ou critique", b: "", c: "" }], deliv: "Une vision à jour de votre niveau de sécurité, et chaque défaut détecté accompagné de sa correction." }
         ],
-        methodLabel: 'Notre méthode', methodTitle: 'Du cadrage au suivi, un interlocuteur unique.',
+        methodLabel: 'Notre approche', methodTitle: 'Trop d’audits de sécurité finissent en rapports que personne n’applique.',
+        methodText: 'Les failles sont listées, mais rarement hiérarchisées, rarement comprises par ceux qui doivent décider, et rarement suivies dans le temps.',
+        methodKey: 'Un audit utile doit mener à des corrections concrètes.', methodAxes: 'Pour cela, nous travaillons sur quatre axes :',
         steps: [
-          { t: 'Cadrer', d: 'Votre contexte, le périmètre, les règles d’intervention : tout est écrit avant de commencer.' },
-          { t: 'Réaliser', d: 'Des méthodes éprouvées, sans perturber votre activité.' },
-          { t: 'Restituer', d: 'Un point à chaud, puis un rapport lisible par vos équipes comme par votre direction.' },
-          { t: 'Accompagner', d: 'Un plan d’action priorisé, et notre aide pour le mener à bien.' }
+          { t: 'Réalisme', d: 'Des scénarios d’attaque fidèles aux menaces qui vous visent vraiment.' },
+          { t: 'Preuve', d: 'Chaque faille est démontrée, jamais seulement supposée.' },
+          { t: 'Clarté', d: 'Des résultats compris par vos équipes techniques comme par votre direction.' },
+          { t: 'Suivi', d: 'Un accompagnement dans la durée, et pas seulement une photo à un instant donné.' }
         ],
         teamLabel: 'Équipe', teamTitle: 'Une équipe formée en cabinets de conseil internationaux.',
         teamText: 'Nous accompagnons de grandes organisations, de la banque à l’industrie : tests d’intrusion, audits cloud et d’architecture, gouvernance et conformité.',
@@ -754,7 +761,7 @@ class Component extends DCLogic {
         soon: 'Expertise and service offers coming soon.'
       },
       cyber: {
-        lead: 'Know where you are exposed, decide what to fix first, and get support to do it.',
+        lead: 'The best time to find a vulnerability is before it gets exploited.',
         cta: 'Tell us about your project', ctaOffers: 'See our offers',
         offersLabel: 'Our offers', delivLabel: 'Deliverable',
         offers: [
@@ -763,12 +770,14 @@ class Component extends DCLogic {
           { title: "SME cyber assessment", sum: "We assess your overall security posture across the tools you use every day.", items: [{ t: "Domain names and DNS with OVH or your provider, email protection against spoofing", b: "", c: "" }, { t: "Collaboration tools: Microsoft 365 or Google Workspace", b: "", c: "" }, { t: "Cloud environment management: Azure, AWS", b: "", c: "" }, { t: "Workstation management: updates, antivirus, encryption, admin rights", b: "", c: "" }, { t: "DevOps: GitHub or GitLab repositories, CI/CD pipelines, secrets management", b: "", c: "" }], deliv: "An assessment of each area and a roadmap of actions, in order of priority." },
           { title: "Security Monitoring", sum: "We keep watch over your configurations to catch weaknesses as soon as they appear.", items: [{ t: "Recurring review of your configurations", b: "", c: "" }, { t: "Monitoring of your ", b: "Active Directory", c: " and cloud environments: OVH, AWS, Microsoft 365" }, { t: "Weekly or monthly report", b: "", c: "" }, { t: "Alert for any major or critical misconfiguration", b: "", c: "" }], deliv: "An up-to-date view of your security level, and every issue detected paired with its fix." }
         ],
-        methodLabel: 'Our approach', methodTitle: 'From scoping to follow-up, a single point of contact.',
+        methodLabel: 'Our approach', methodTitle: 'Too many security audits end in reports nobody acts on.',
+        methodText: 'Vulnerabilities get listed, but rarely prioritised, rarely understood by those who make the decisions, and rarely followed up over time.',
+        methodKey: 'A useful audit has to lead to real fixes.', methodAxes: 'To get there, we work on four fronts:',
         steps: [
-          { t: 'Scope', d: 'Your context, the scope and the rules of engagement: everything is agreed in writing before we start.' },
-          { t: 'Execute', d: 'Proven methods, without disrupting your operations.' },
-          { t: 'Report', d: 'An immediate debrief, then a report your teams and your leadership can both read.' },
-          { t: 'Support', d: 'A prioritised action plan, and our help to see it through.' }
+          { t: 'Realism', d: 'Attack scenarios that reflect the threats you actually face.' },
+          { t: 'Proof', d: 'Every vulnerability is demonstrated, never just assumed.' },
+          { t: 'Clarity', d: 'Results your technical teams and your leadership both understand.' },
+          { t: 'Follow-up', d: 'Support over time, not just a snapshot at a given moment.' }
         ],
         teamLabel: 'Team', teamTitle: 'A team trained at international consulting firms.',
         teamText: 'We support large organisations, from banking to industry: penetration testing, cloud and architecture audits, governance and compliance.',
