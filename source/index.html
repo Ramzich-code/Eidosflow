@@ -46,8 +46,8 @@
 @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url("assets/fonts/jetbrains-mono.woff2") format('woff2')}
 html{scroll-behavior:smooth}
 @keyframes ef-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes ef-lang-fr{0%{opacity:0;transform:translateY(8px) rotateX(90deg)}60%{opacity:1;transform:translateY(-2px) rotateX(0)}100%{opacity:1;transform:none}}
-@keyframes ef-lang-en{0%{opacity:0;transform:translateY(8px) rotateX(90deg)}60%{opacity:1;transform:translateY(-2px) rotateX(0)}100%{opacity:1;transform:none}}
+@keyframes ef-lang-fr{from{opacity:0;transform:rotateX(-90deg)}to{opacity:1;transform:none}}
+@keyframes ef-lang-en{from{opacity:0;transform:rotateX(-90deg)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.ef-lang{animation:none!important}}
 @keyframes ef-grid{from{background-position:0 0,0 0}to{background-position:56px 56px,56px 56px}}
 body{margin:0;background:#FFFFFF;color:#191D37;font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -56,6 +56,18 @@ a{color:#456794;text-decoration:none}
 a:hover{color:#191D37}
 button,input,textarea{font-family:inherit}
 :focus-visible{outline:2px solid #456794;outline-offset:3px}
+/* Bouton « Copier » du contact — interaction « Copy Hash » (amicro.dev/buttons/btn-4, MIT) */
+.ef-copy{position:relative;display:flex;align-items:center;justify-content:center;min-width:58px;padding:0 20px 0 18px;border:0;border-left:1px solid #DCE2EA;background:#FFFFFF;color:#191D37;cursor:pointer;transition:background-color .2s ease,padding .32s cubic-bezier(.34,1.56,.64,1)}
+.ef-copy:hover{background:#F4F6F9;padding:0 24px 0 22px}
+.ef-copy[data-copied="1"]{background:#E8ECF2}
+.ef-copy-ic{position:relative;display:block;width:16px;height:16px;flex-shrink:0;transition:transform .18s ease}
+.ef-copy:active .ef-copy-ic{transform:scale(.88)}
+.ef-copy-ic svg{position:absolute;inset:0;display:block;transition:transform .32s cubic-bezier(.34,1.56,.64,1),opacity .2s ease}
+.ef-copy-i1{color:#456794}
+.ef-copy-i2{color:#059669;opacity:0;transform:scale(.5)}
+.ef-copy[data-copied="1"] .ef-copy-i1{opacity:0;transform:scale(.5)}
+.ef-copy[data-copied="1"] .ef-copy-i2{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.ef-copy,.ef-copy-ic,.ef-copy-ic svg{transition:none}}
 /* Page Cybersécurité */
 .cy-sec{padding:clamp(64px,8vw,112px) clamp(20px,4vw,48px);scroll-margin-top:76px}
 .cy-wrap{max-width:1240px;margin:0 auto}
@@ -148,7 +160,7 @@ button,input,textarea{font-family:inherit}
       </nav>
     </sc-if>
     <div style="display:flex;align-items:center;gap:12px;flex:none">
-      <button type="button" sc-camel-on-click="{{ toggleLang }}" aria-label="{{ langAria }}" title="{{ langAria }}" style="margin-left:8px;width:52px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.08em;color:#FFFFFF" style-hover="border-color:#A3B2C7;background:rgba(163,178,199,.12)"><span class="ef-lang" style="display:inline-block;animation:{{ langAnim }} .4s cubic-bezier(.2,.8,.2,1)">{{ langLabel }}</span></button>
+      <button type="button" sc-camel-on-click="{{ toggleLang }}" aria-label="{{ langAria }}" title="{{ langAria }}" style="margin-left:8px;width:52px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.08em;color:#FFFFFF;perspective:200px" style-hover="border-color:#A3B2C7;background:rgba(163,178,199,.12)"><span class="ef-lang" aria-hidden="true" style="display:inline-block;animation:{{ langAnim }} .45s cubic-bezier(.34,1.56,.64,1) both">{{ langC1 }}</span><span class="ef-lang" aria-hidden="true" style="display:inline-block;animation:{{ langAnim }} .45s cubic-bezier(.34,1.56,.64,1) .06s both">{{ langC2 }}</span></button>
       <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
         <button type="button" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-label="Menu" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(163,178,199,.35);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
           <span style="width:18px;height:2px;background:#FFFFFF"></span><span style="width:18px;height:2px;background:#FFFFFF"></span><span style="width:12px;height:2px;margin-left:6px;background:#A3B2C7"></span>
@@ -517,9 +529,11 @@ button,input,textarea{font-family:inherit}
     </div>
     <div style="display:inline-flex;align-items:stretch;border-radius:999px;background:#FFFFFF;color:#191D37;overflow:hidden">
       <a href="{{ mailHref }}" target="_top" sc-camel-on-click="{{ openMail }}" style="display:inline-flex;align-items:center;padding:18px 22px 18px 28px;font-size:16px;font-weight:600;color:#191D37" style-hover="color:#456794">contact@eidosflow.com</a>
-      <button type="button" sc-camel-on-click="{{ copyMail }}" aria-label="{{ copyLabel }}" title="{{ copyLabel }}" style="display:flex;align-items:center;justify-content:center;gap:8px;min-width:58px;padding:0 20px 0 16px;border:0;border-left:1px solid #DCE2EA;background:transparent;color:#456794;cursor:pointer;font-size:13px;font-weight:600" style-hover="background:#F4F6F9;color:#191D37">
-        <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
-        <sc-if value="{{ notCopied }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg></sc-if>
+      <button type="button" class="ef-copy" data-copied="{{ copiedAttr }}" sc-camel-on-click="{{ copyMail }}" aria-label="{{ copyLabel }}" title="{{ copyLabel }}">
+        <span class="ef-copy-ic" aria-hidden="true">
+          <svg class="ef-copy-i1" width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>
+          <svg class="ef-copy-i2" width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+        </span>
       </button>
     </div>
   </div>
@@ -1008,7 +1022,7 @@ class Component extends DCLogic {
         if (!w) window.location.href = href;
       },
       copyLabel: this.state.copied ? t.cta.copied : t.cta.copy,
-      copied: !!this.state.copied, notCopied: !this.state.copied,
+      copied: !!this.state.copied, notCopied: !this.state.copied, copiedAttr: this.state.copied ? '1' : '0',
       copyMail: () => {
         const done = () => { this.setState({ copied: true }); clearTimeout(this._cp); this._cp = setTimeout(() => this.setState({ copied: false }), 2000); };
         const fallback = () => { const ta = document.createElement('textarea'); ta.value = 'contact@eidosflow.com'; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (er) {} ta.remove(); done(); };
@@ -1032,7 +1046,7 @@ class Component extends DCLogic {
       frBg: lang === 'fr' ? '#FFFFFF' : 'transparent', frFg: lang === 'fr' ? '#191D37' : '#E4E8EF',
       enBg: lang === 'en' ? '#FFFFFF' : 'transparent', enFg: lang === 'en' ? '#191D37' : '#E4E8EF',
       setFr: this.nav(page, 'fr'), setEn: this.nav(page, 'en'),
-      toggleLang: this.nav(page, lang === 'fr' ? 'en' : 'fr'), langLabel: lang === 'fr' ? 'FR' : 'EN', langAnim: 'ef-lang-' + lang,
+      toggleLang: this.nav(page, lang === 'fr' ? 'en' : 'fr'), langLabel: lang === 'fr' ? 'FR' : 'EN', langC1: lang === 'fr' ? 'F' : 'E', langC2: lang === 'fr' ? 'R' : 'N', langAnim: 'ef-lang-' + lang,
       langAria: lang === 'fr' ? 'Switch to English' : 'Passer en français',
       toTop: (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     };
