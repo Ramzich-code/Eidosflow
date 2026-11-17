@@ -1,6 +1,6 @@
 /*
  * EidosFlow website — central configuration.
- * Loaded at runtime; edit with any text editor, no rebuild needed.
+ * Loaded at runtime; edit with any text editor, then run  node build.mjs  to publish.
  *
  * SOCIAL LINKS (footer, "Follow us" / "Suivez-nous")
  *   url: null   -> icon + name shown as plain, non-clickable text.

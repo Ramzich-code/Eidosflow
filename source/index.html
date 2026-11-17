@@ -1,30 +1,20 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="fr"><head>
 <meta charset="utf-8">
+<!-- BASE -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+<script src="seo.js"></script>
 <script src="js/runtime.js"></script>
-<!-- Mesure d’audience Umami (sans cookie) -->
-<script defer src="https://cloud.umami.is/script.js" data-website-id="03ca36fd-4b55-417c-a931-d1e23ae50e6f"></script>
+<!-- Mesure d’audience Umami (sans cookie). data-domains : seules les visites du site public sont comptées (pas les tests en local). -->
+<script defer src="https://cloud.umami.is/script.js" data-website-id="03ca36fd-4b55-417c-a931-d1e23ae50e6f" data-domains="ramzich-code.github.io,eidosflow.com,www.eidosflow.com"></script>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<!-- Aperçu de partage (LinkedIn, WhatsApp, etc.) -->
-<meta name="description" content="EidosFlow — conseil technologique et expertise technique en cybersécurité, data et IA. Vision stratégique, profondeur technique, regard humain.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="EidosFlow">
-<meta property="og:title" content="EidosFlow — Expertise That Moves You Forward.">
-<meta property="og:description" content="EidosFlow — conseil technologique et expertise technique en cybersécurité, data et IA. Vision stratégique, profondeur technique, regard humain.">
-<meta property="og:url" content="https://ramzich-code.github.io/Eidosflow/">
-<meta property="og:image" content="https://ramzich-code.github.io/Eidosflow/og-image.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="EidosFlow — Conseil technologique &amp; expertise technique : cybersécurité, data, IA">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:locale:alternate" content="en_US">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="EidosFlow — Expertise That Moves You Forward.">
-<meta name="twitter:description" content="EidosFlow — conseil technologique et expertise technique en cybersécurité, data et IA. Vision stratégique, profondeur technique, regard humain.">
-<meta name="twitter:image" content="https://ramzich-code.github.io/Eidosflow/og-image.jpg">
+<!-- SEO:START — remplacé page par page par build.mjs (voir seo.js) -->
+<title>EidosFlow — Conseil en cybersécurité, data et IA</title>
+<meta name="description" content="EidosFlow, cabinet indépendant de conseil technologique : cybersécurité, data et IA. Vision stratégique, profondeur technique, regard humain.">
+<!-- SEO:END -->
 </head>
 <body>
 <x-dc>
@@ -37,14 +27,12 @@
 
 
 
-
-<title>EidosFlow</title>
 <style>
 @font-face{font-family:'Montserrat';font-style:normal;font-weight:300 700;font-display:swap;src:url("assets/fonts/montserrat.woff2") format('woff2')}
 @font-face{font-family:'Montserrat';font-style:italic;font-weight:300 700;font-display:swap;src:url("assets/fonts/montserrat-italic.woff2") format('woff2')}
 @font-face{font-family:'Quicksand';font-style:normal;font-weight:300 700;font-display:swap;src:url("assets/fonts/quicksand.woff2") format('woff2')}
 @font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 700;font-display:swap;src:url("assets/fonts/jetbrains-mono.woff2") format('woff2')}
-html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 @keyframes ef-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes ef-lang-fr{from{opacity:0;transform:rotateX(-90deg)}to{opacity:1;transform:none}}
 @keyframes ef-lang-en{from{opacity:0;transform:rotateX(-90deg)}to{opacity:1;transform:none}}
@@ -56,6 +44,16 @@ a{color:#456794;text-decoration:none}
 a:hover{color:#191D37}
 button,input,textarea{font-family:inherit}
 :focus-visible{outline:2px solid #456794;outline-offset:3px}
+/* Accessibilité : contour de focus bien visible sur les fonds sombres (contraste > 3:1) */
+.ef-dark :focus-visible{outline-color:#A3B2C7}
+/* Lien d’évitement « Aller au contenu », visible seulement au clavier */
+.ef-skip{position:fixed;top:12px;left:12px;z-index:100;padding:12px 18px;border-radius:999px;background:#FFFFFF;color:#191D37;font-size:14px;font-weight:600;transform:translateY(-200%);transition:transform .15s}
+.ef-skip:focus{transform:none}
+.ef-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#main:focus{outline:none}
+/* Bouton pause du défilement des logos */
+.ef-pause{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:6px;padding:8px 14px;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;color:#D3DAE5;font-size:13px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s}
+.ef-pause:hover{border-color:#A3B2C7;background:rgba(163,178,199,.12)}
 /* Bouton « Copier » du contact — interaction « Copy Hash » (amicro.dev/buttons/btn-4, MIT) */
 .ef-copy{position:relative;display:flex;align-items:center;justify-content:center;min-width:58px;padding:0 20px 0 18px;border:0;border-left:1px solid #DCE2EA;background:#FFFFFF;color:#191D37;cursor:pointer;transition:background-color .2s ease,padding .32s cubic-bezier(.34,1.56,.64,1)}
 .ef-copy:hover{background:#F4F6F9;padding:0 24px 0 22px}
@@ -71,7 +69,7 @@ button,input,textarea{font-family:inherit}
 /* Page Cybersécurité */
 .cy-sec{padding:clamp(64px,8vw,112px) clamp(20px,4vw,48px);scroll-margin-top:76px}
 .cy-wrap{max-width:1240px;margin:0 auto}
-.cy-eyebrow{margin:0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#456794}
+.cy-eyebrow{margin:0;font-weight:400;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#456794}
 .cy-eyebrow::before{content:"";width:26px;height:3px;background:currentColor;transform:skewX(-22deg)}
 .cy-title{margin:14px 0 0;font-size:clamp(26px,3vw,38px);line-height:1.2;font-weight:600;letter-spacing:-.025em;color:#191D37;text-wrap:balance}
 .cy-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
@@ -135,52 +133,53 @@ button,input,textarea{font-family:inherit}
 
 <div data-screen-label="Site" style="min-height:100vh;display:flex;flex-direction:column;background:#FFFFFF">
 
-<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:#12152A;border-bottom:1px solid rgba(163,178,199,.14)">
+<a class="ef-skip" href="{{ here }}#main" sc-camel-on-click="{{ skipToMain }}">{{ t.a11y.skip }}</a>
+<header class="ef-dark" style="position:fixed;top:0;left:0;right:0;z-index:50;background:#12152A;border-bottom:1px solid rgba(163,178,199,.14)">
   <div style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px">
     <a href="{{ homeHref }}" sc-camel-on-click="{{ goHome }}" aria-label="EidosFlow" style="display:flex;align-items:center;gap:12px;flex:none;margin-right:auto">
       <svg width="46" height="23" sc-camel-view-box="-10.2 -2.9 49 24.1" aria-hidden="true"><g transform="skewX(-22)" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 1.5H0V19.5H18V12M0 10.5H8"></path><path d="M29 16.8H36V-1.2H18V6.3M36 7.8H28"></path></g></svg>
       <span style="font-family:'Quicksand',sans-serif;font-size:23px;line-height:1;color:#FFFFFF">eidos<span style="color:#6E8DB8">flow</span></span>
     </a>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-      <nav aria-label="Navigation" style="display:flex;align-items:center;gap:32px">
-        <div sc-camel-on-mouse-enter="{{ ddOpen }}" sc-camel-on-mouse-leave="{{ ddClose }}" style="position:relative;height:76px;display:flex;align-items:center">
-<button type="button" sc-camel-on-click="{{ ddToggle }}" aria-expanded="{{ dropdown }}" aria-haspopup="true" style="height:32px;display:flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;cursor:pointer;font-size:14px;font-weight:500;color:#E4E8EF;white-space:nowrap;border-bottom:2px solid {{ capBc }}" style-hover="color:#A3B2C7">{{ t.nav.capabilities }}<svg width="10" height="6" sc-camel-view-box="0 0 10 6" aria-hidden="true" style="transform:{{ caretRot }};transition:transform .2s"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+      <nav aria-label="{{ t.a11y.mainNav }}" style="display:flex;align-items:center;gap:32px">
+        <div sc-camel-on-mouse-enter="{{ ddOpen }}" sc-camel-on-mouse-leave="{{ ddClose }}" sc-camel-on-blur="{{ ddBlur }}" style="position:relative;height:76px;display:flex;align-items:center">
+<button type="button" id="ef-dd-btn" sc-camel-on-click="{{ ddToggle }}" aria-expanded="{{ dropdown }}" aria-controls="ef-dd" style="height:32px;display:flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;cursor:pointer;font-size:14px;font-weight:500;color:#E4E8EF;white-space:nowrap;border-bottom:2px solid {{ capBc }}" style-hover="color:#A3B2C7">{{ t.nav.capabilities }}<svg width="10" height="6" sc-camel-view-box="0 0 10 6" aria-hidden="true" style="transform:{{ caretRot }};transition:transform .2s"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
           <sc-if value="{{ dropdown }}" hint-placeholder-val="{{ false }}">
-            <div role="menu" style="position:absolute;top:70px;left:-20px;min-width:240px;padding:8px;border-radius:12px;background:#12152A;border:1px solid rgba(163,178,199,.2);box-shadow:0 24px 48px -16px rgba(0,0,0,.55);display:flex;flex-direction:column">
-              <a role="menuitem" href="{{ hrefs.capabilities }}" sc-camel-on-click="{{ go.capabilities }}" style="display:flex;align-items:center;padding:12px 14px;border-radius:8px;font-size:14.5px;font-weight:500;color:#D3DAE5;border-bottom:1px solid rgba(163,178,199,.15);margin-bottom:4px" style-hover="background:rgba(163,178,199,.1);color:#FFFFFF">{{ t.cap.allLabel }}</a>
+            <div id="ef-dd" style="position:absolute;top:70px;left:-20px;min-width:240px;padding:8px;border-radius:12px;background:#12152A;border:1px solid rgba(163,178,199,.2);box-shadow:0 24px 48px -16px rgba(0,0,0,.55);display:flex;flex-direction:column">
+              <a href="{{ hrefs.capabilities }}" sc-camel-on-click="{{ go.capabilities }}" style="display:flex;align-items:center;padding:12px 14px;border-radius:8px;font-size:14.5px;font-weight:500;color:#D3DAE5;border-bottom:1px solid rgba(163,178,199,.15);margin-bottom:4px" style-hover="background:rgba(163,178,199,.1);color:#FFFFFF">{{ t.cap.allLabel }}</a>
               <sc-for list="{{ domainLinks }}" as="d" hint-placeholder-count="3">
-                <a role="menuitem" href="{{ d.href }}" sc-camel-on-click="{{ d.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px;border-radius:8px;font-size:14.5px;font-weight:500;color:{{ d.fg }};background:{{ d.bg }}" style-hover="background:rgba(163,178,199,.1);color:#FFFFFF">{{ d.label }}<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#A3B2C7">{{ d.note }}</span></a>
+                <a href="{{ d.href }}" aria-current="{{ d.current }}" sc-camel-on-click="{{ d.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px;border-radius:8px;font-size:14.5px;font-weight:500;color:{{ d.fg }};background:{{ d.bg }}" style-hover="background:rgba(163,178,199,.1);color:#FFFFFF">{{ d.label }}<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#A3B2C7">{{ d.note }}</span></a>
               </sc-for>
             </div>
           </sc-if>
         </div>
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="3">
-          <a href="{{ item.href }}" sc-camel-on-click="{{ item.go }}" style="height:32px;display:flex;align-items:center;font-size:14px;font-weight:500;color:#E4E8EF;white-space:nowrap;border-bottom:2px solid {{ item.bc }}" style-hover="color:#A3B2C7">{{ item.label }}</a>
+          <a href="{{ item.href }}" sc-camel-on-click="{{ item.go }}" aria-current="{{ item.current }}" style="height:32px;display:flex;align-items:center;font-size:14px;font-weight:500;color:#E4E8EF;white-space:nowrap;border-bottom:2px solid {{ item.bc }}" style-hover="color:#A3B2C7">{{ item.label }}</a>
         </sc-for>
       </nav>
     </sc-if>
     <div style="display:flex;align-items:center;gap:12px;flex:none">
       <button type="button" sc-camel-on-click="{{ toggleLang }}" aria-label="{{ langAria }}" title="{{ langAria }}" style="margin-left:8px;width:52px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.08em;color:#FFFFFF;perspective:200px" style-hover="border-color:#A3B2C7;background:rgba(163,178,199,.12)"><span class="ef-lang" aria-hidden="true" style="display:inline-block;animation:{{ langAnim }} .45s cubic-bezier(.34,1.56,.64,1) both">{{ langC1 }}</span><span class="ef-lang" aria-hidden="true" style="display:inline-block;animation:{{ langAnim }} .45s cubic-bezier(.34,1.56,.64,1) .06s both">{{ langC2 }}</span></button>
       <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-        <button type="button" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-label="Menu" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(163,178,199,.35);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+        <button type="button" id="ef-menu-btn" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" aria-controls="ef-mobile-nav" aria-label="{{ menuLabel }}" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(163,178,199,.35);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
           <span style="width:18px;height:2px;background:#FFFFFF"></span><span style="width:18px;height:2px;background:#FFFFFF"></span><span style="width:12px;height:2px;margin-left:6px;background:#A3B2C7"></span>
         </button>
       </sc-if>
     </div>
   </div>
   <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
-    <nav style="display:flex;flex-direction:column;padding:4px clamp(20px,4vw,48px) 24px;border-top:1px solid rgba(163,178,199,.15)">
+    <nav id="ef-mobile-nav" aria-label="{{ t.a11y.mainNav }}" style="display:flex;flex-direction:column;padding:4px clamp(20px,4vw,48px) 24px;border-top:1px solid rgba(163,178,199,.15)">
       <sc-for list="{{ mobileItems }}" as="item" hint-placeholder-count="6">
-        <a href="{{ item.href }}" sc-camel-on-click="{{ item.go }}" style="padding:14px 0 14px {{ item.indent }};font-size:{{ item.size }};font-weight:500;color:{{ item.fg }};border-bottom:1px solid rgba(163,178,199,.12)">{{ item.label }}</a>
+        <a href="{{ item.href }}" sc-camel-on-click="{{ item.go }}" aria-current="{{ item.current }}" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0 14px {{ item.indent }};font-size:{{ item.size }};font-weight:500;color:{{ item.fg }};border-bottom:1px solid rgba(163,178,199,.12)">{{ item.label }}<span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#A3B2C7">{{ item.note }}</span></a>
       </sc-for>
     </nav>
   </sc-if>
 </header>
 
-<main style="flex:1">
+<main id="main" tabindex="-1" style="flex:1">
 
 <sc-if value="{{ pg.home }}" hint-placeholder-val="{{ true }}">
-  <section data-screen-label="Accueil — page de garde" style="position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#191D37;color:#FFFFFF;padding:120px clamp(20px,4vw,48px) 96px">
+  <section class="ef-dark" data-screen-label="Accueil — page de garde" style="position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#191D37;color:#FFFFFF;padding:120px clamp(20px,4vw,48px) 96px">
     <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(163,178,199,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(163,178,199,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none"></div>
     {{ coverBg }}
     <div style="position:relative;max-width:860px;display:flex;flex-direction:column;align-items:center;gap:30px;text-align:center">
@@ -188,11 +187,11 @@ button,input,textarea{font-family:inherit}
         <svg width="112" height="56" sc-camel-view-box="-10.2 -2.9 49 24.1" aria-hidden="true"><g transform="skewX(-22)" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 1.5H0V19.5H18V12M0 10.5H8"></path><path d="M29 16.8H36V-1.2H18V6.3M36 7.8H28"></path></g></svg>
         <span style="font-family:'Quicksand',sans-serif;font-size:clamp(40px,6vw,64px);line-height:1;letter-spacing:-.01em;color:#FFFFFF">eidos<span style="color:#6E8DB8">flow</span></span>
       </div>
-      <p style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#A3B2C7">{{ pos.name }}</p>
+      <h1 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:#A3B2C7">{{ pos.name }}</h1>
       <div style="width:56px;height:3px;background:#456794;transform:skewX(-22deg)"></div>
-      <h1 style="margin:0;font-size:clamp(32px,4.6vw,58px);line-height:1.08;font-weight:600;letter-spacing:-.03em;text-wrap:balance">{{ pos.slogan }}</h1>
+      <p lang="en" style="margin:0;font-size:clamp(32px,4.6vw,58px);line-height:1.08;font-weight:600;letter-spacing:-.03em;text-wrap:balance">{{ pos.slogan }}</p>
       <p style="margin:0;max-width:640px;font-size:clamp(16px,1.5vw,19px);line-height:1.6;color:#D3DAE5;text-wrap:balance">{{ pos.triad }}</p>
-      <a href="#le-cabinet" style="display:inline-flex;align-items:center;gap:12px;margin-top:6px;padding:15px 26px;border-radius:999px;background:#FFFFFF;color:#191D37;font-size:15px;font-weight:600" style-hover="background:#A3B2C7;color:#191D37">{{ t.home.coverBtn }}</a>
+      <a href="{{ here }}#le-cabinet" sc-camel-on-click="{{ toFirm }}" style="display:inline-flex;align-items:center;gap:12px;margin-top:6px;padding:15px 26px;border-radius:999px;background:#FFFFFF;color:#191D37;font-size:15px;font-weight:600" style-hover="background:#A3B2C7;color:#191D37">{{ t.home.coverBtn }}</a>
     </div>
   </section>
 
@@ -220,12 +219,15 @@ button,input,textarea{font-family:inherit}
     </div>
   </section>
 
-  <section data-screen-label="Accueil — références" style="position:relative;background:#0D1022;color:#FFFFFF;padding:clamp(64px,8vw,104px) 0;overflow:hidden">
+  <section class="ef-dark" data-screen-label="Accueil — références" style="position:relative;background:#0D1022;color:#FFFFFF;padding:clamp(64px,8vw,104px) 0;overflow:hidden">
     {{ refTexture }}
     <div style="position:relative;max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px) clamp(32px,4vw,48px);display:flex;flex-direction:column;gap:14px">
       <p style="margin:0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3B2C7"><span style="width:26px;height:3px;background:#A3B2C7;transform:skewX(-22deg)"></span>{{ t.home.refEyebrow }}</p>
       <h2 style="margin:0;font-size:clamp(30px,3.8vw,48px);line-height:1.1;font-weight:600;letter-spacing:-.03em">{{ t.home.refTitle }}</h2>
       <p style="margin:0;max-width:640px;font-size:16px;line-height:1.6;color:#D3DAE5">{{ t.home.refSub }}</p>
+      <sc-if value="{{ canPauseMarquee }}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="ef-pause" sc-camel-on-click="{{ toggleMarquee }}" aria-pressed="{{ marqueePaused }}">{{ marqueeIcon }}{{ marqueeLabel }}</button>
+      </sc-if>
     </div>
     {{ logoMarquee }}
   </section>
@@ -248,7 +250,7 @@ button,input,textarea{font-family:inherit}
 
 <sc-if value="{{ pg.capabilities }}" hint-placeholder-val="{{ false }}">
   <sc-if value="{{ capOverview }}" hint-placeholder-val="{{ false }}">
-  <section data-screen-label="Savoir-faire — vue d’ensemble" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(140px,15vw,180px) clamp(20px,4vw,48px) clamp(56px,7vw,88px)">
+  <section class="ef-dark" data-screen-label="Savoir-faire — vue d’ensemble" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(140px,15vw,180px) clamp(20px,4vw,48px) clamp(56px,7vw,88px)">
     <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(163,178,199,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(163,178,199,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none"></div>
     <div style="position:relative;max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
       <p style="margin:0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3B2C7"><span style="width:26px;height:3px;background:#A3B2C7;transform:skewX(-22deg)"></span>{{ t.nav.capabilities }}</p>
@@ -260,7 +262,7 @@ button,input,textarea{font-family:inherit}
     <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px">
       <sc-for list="{{ overviewCards }}" as="c" hint-placeholder-count="3">
         <a href="{{ c.href }}" sc-camel-on-click="{{ c.go }}" style="display:flex;flex-direction:column;gap:16px;padding:clamp(28px,3vw,36px);min-height:260px;border-radius:14px;background:#FFFFFF;border:1px solid #DCE2EA;box-shadow:0 2px 14px rgba(25,29,55,.06);color:#191D37;transition:transform .2s,box-shadow .2s" style-hover="transform:translateY(-3px);box-shadow:0 18px 40px -18px rgba(25,29,55,.35);border-color:#456794">
-          <span style="font-size:clamp(26px,2.6vw,32px);font-weight:600;letter-spacing:-.025em;line-height:1.1">{{ c.title }}</span>
+          <h2 style="margin:0;font-size:clamp(26px,2.6vw,32px);font-weight:600;letter-spacing:-.025em;line-height:1.1">{{ c.title }}</h2>
           <span style="font-size:15px;line-height:1.6;color:#3A4060;text-wrap:pretty">{{ c.lead }}</span>
           <span style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#456794">{{ t.home.discover }} <span aria-hidden="true">→</span></span>
         </a>
@@ -269,7 +271,7 @@ button,input,textarea{font-family:inherit}
   </section>
   </sc-if>
   <sc-if value="{{ capDetail }}" hint-placeholder-val="{{ false }}">
-  <section data-screen-label="Savoir-faire — domaine" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(140px,15vw,180px) clamp(20px,4vw,48px) clamp(56px,7vw,88px)">
+  <section class="ef-dark" data-screen-label="Savoir-faire — domaine" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(140px,15vw,180px) clamp(20px,4vw,48px) clamp(56px,7vw,88px)">
     <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(163,178,199,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(163,178,199,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none"></div>
     <div style="position:relative;max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:24px">
       <p style="margin:0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3B2C7"><span style="width:26px;height:3px;background:#A3B2C7;transform:skewX(-22deg)"></span>{{ t.nav.capabilities }}</p>
@@ -277,8 +279,8 @@ button,input,textarea{font-family:inherit}
       <p style="margin:0;max-width:620px;font-size:clamp(16px,1.4vw,18px);line-height:1.65;color:#D3DAE5;text-wrap:pretty">{{ dom.heroLead }}</p>
       <sc-if value="{{ isCyber }}" hint-placeholder-val="{{ false }}">
         <div class="cy-ctas">
-          <a class="cy-btn cy-solid" href="#contact" sc-camel-on-click="{{ goContact }}">{{ t.cyber.cta }}</a>
-          <a class="cy-btn cy-ghost" href="#cy-offres" sc-camel-on-click="{{ cyToOffers }}">{{ t.cyber.ctaOffers }}</a>
+          <a class="cy-btn cy-solid" href="{{ here }}#contact" sc-camel-on-click="{{ goContact }}">{{ t.cyber.cta }}</a>
+          <a class="cy-btn cy-ghost" href="{{ here }}#cy-offres" sc-camel-on-click="{{ cyToOffers }}">{{ t.cyber.ctaOffers }}</a>
         </div>
       </sc-if>
     </div>
@@ -291,7 +293,7 @@ button,input,textarea{font-family:inherit}
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px;align-items:start">
         <article style="display:flex;flex-direction:column;background:#FFFFFF;border-radius:6px;box-shadow:0 2px 14px rgba(25,29,55,.08);overflow:hidden">
           <div style="padding:26px 24px 22px;border-bottom:1px solid #E6EAF0;text-align:center">
-            <h3 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#456794">{{ t.cap.expTitle }}</h3>
+            <h2 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#456794">{{ t.cap.expTitle }}</h2>
           </div>
           <ul style="margin:0;padding:8px 24px 16px;list-style:none">
               <sc-for list="{{ dom.exp }}" as="r" hint-placeholder-count="4">
@@ -315,7 +317,7 @@ button,input,textarea{font-family:inherit}
         </article>
         <article style="display:flex;flex-direction:column;background:#FFFFFF;border-radius:6px;box-shadow:0 2px 14px rgba(25,29,55,.08);overflow:hidden">
           <div style="padding:26px 24px 22px;border-bottom:1px solid #E6EAF0;text-align:center">
-            <h3 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#456794">{{ t.cap.svcTitle }}</h3>
+            <h2 style="margin:0;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#456794">{{ t.cap.svcTitle }}</h2>
           </div>
           <ul style="margin:0;padding:8px 24px 16px;list-style:none">
               <sc-for list="{{ dom.svc }}" as="r" hint-placeholder-count="4">
@@ -344,7 +346,7 @@ button,input,textarea{font-family:inherit}
   <sc-if value="{{ isCyber }}" hint-placeholder-val="{{ false }}">
   <section id="cy-offres" class="cy-sec" style="background:#F4F6F9">
     <div class="cy-wrap">
-      <p class="cy-eyebrow">{{ t.cyber.offersLabel }}</p>
+      <h2 class="cy-eyebrow">{{ t.cyber.offersLabel }}</h2>
       <div class="cy-offers">
         <sc-for list="{{ t.cyber.offers }}" as="o" hint-placeholder-count="4">
           <article class="cy-offer">
@@ -402,9 +404,9 @@ button,input,textarea{font-family:inherit}
       <a href="{{ post.href }}" sc-camel-on-click="{{ post.open }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,56px);padding:clamp(28px,4vw,48px);border-radius:18px;background:#F4F6F9;border:1px solid #DCE2EA;color:#191D37" style-hover="border-color:#456794;color:#191D37">
         <div style="display:flex;flex-direction:column;gap:18px">
           <span style="display:flex;flex-wrap:wrap;gap:8px 16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#456794"><span>{{ post.category }}</span><span style="color:#4A5068">{{ post.date }} · {{ post.read }}</span></span>
-          <h2 style="margin:0;font-size:clamp(26px,3vw,38px);line-height:1.15;font-weight:600;letter-spacing:-.025em;text-wrap:balance">{{ post.title }}</h2>
+          <h2 style="margin:0;font-size:clamp(26px,3vw,38px);line-height:1.15;font-weight:600;letter-spacing:-.025em;text-wrap:balance" lang="en">{{ post.title }}</h2>
           <div style="display:flex;align-items:center;gap:14px">
-            <img src="assets/img/auteur-avatar.jpg" alt="" style="flex:none;width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 0;background:#E4E7EE">
+            <img src="assets/img/auteur-avatar.jpg" alt="" width="400" height="400" decoding="async" style="flex:none;width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 0;background:#E4E7EE">
             <span style="display:flex;flex-direction:column;gap:2px">
               <span style="font-size:15px;font-weight:600;color:#191D37">{{ post.author }}</span>
               <span style="font-size:13px;color:#4A5068">{{ post.role }}</span>
@@ -425,10 +427,10 @@ button,input,textarea{font-family:inherit}
     <div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
       <a href="{{ hrefs.blog }}" sc-camel-on-click="{{ go.blog }}" style="align-self:flex-start;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#456794" style-hover="color:#191D37">{{ t.blog.back }}</a>
       <span style="display:flex;flex-wrap:wrap;gap:8px 16px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#456794"><span>{{ post.category }}</span><span style="color:#4A5068">{{ post.date }} · {{ post.read }}</span></span>
-      <h1 style="margin:0;font-size:clamp(34px,4.6vw,54px);line-height:1.08;font-weight:600;letter-spacing:-.03em;text-wrap:balance">{{ post.title }}</h1>
+      <h1 style="margin:0;font-size:clamp(34px,4.6vw,54px);line-height:1.08;font-weight:600;letter-spacing:-.03em;text-wrap:balance" lang="en">{{ post.title }}</h1>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;border-top:1px solid #DCE2EA;border-bottom:1px solid #DCE2EA">
         <div style="display:flex;align-items:center;gap:14px">
-            <img src="assets/img/auteur-avatar.jpg" alt="" style="flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:50% 0;background:#E4E7EE">
+            <img src="assets/img/auteur-avatar.jpg" alt="" width="400" height="400" decoding="async" style="flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:50% 0;background:#E4E7EE">
             <span style="display:flex;flex-direction:column;gap:2px">
               <span style="font-size:15px;font-weight:600;color:#191D37">{{ post.author }}</span>
               <span style="font-size:13px;color:#4A5068">{{ post.role }}</span>
@@ -441,6 +443,7 @@ button,input,textarea{font-family:inherit}
       <div lang="en" style="display:flex;flex-direction:column;gap:20px;font-size:17px;line-height:1.75;color:#2C3150">
         <sc-for list="{{ post.blocks }}" as="bl" hint-placeholder-count="6">
           <sc-if value="{{ bl.isP }}" hint-placeholder-val="{{ true }}"><p style="margin:0;text-wrap:pretty">{{ bl.text }}</p></sc-if>
+          <sc-if value="{{ bl.isPL }}" hint-placeholder-val="{{ false }}"><p style="margin:0;text-wrap:pretty">{{ bl.before }}<a href="{{ bl.href }}" target="_blank" rel="noopener noreferrer" style="color:#456794;font-weight:600;text-decoration:underline;text-underline-offset:3px">{{ bl.link }}<span class="ef-sr">{{ t.a11y.newTab }}</span></a>{{ bl.after }}</p></sc-if>
           <sc-if value="{{ bl.isH2 }}" hint-placeholder-val="{{ false }}"><h2 style="margin:20px 0 0;font-size:clamp(23px,2.4vw,28px);line-height:1.25;font-weight:600;letter-spacing:-.02em;color:#191D37">{{ bl.text }}</h2></sc-if>
           <sc-if value="{{ bl.isH3 }}" hint-placeholder-val="{{ false }}"><h3 style="margin:8px 0 0;font-size:19px;line-height:1.35;font-weight:600;color:#191D37">{{ bl.text }}</h3></sc-if>
           <sc-if value="{{ bl.isEx }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:14px 18px;border-radius:8px;background:#F4F6F9;font-size:15.5px;line-height:1.6;color:#2C3150">{{ bl.text }}</p></sc-if>
@@ -453,7 +456,7 @@ button,input,textarea{font-family:inherit}
           </sc-if>
         </sc-for>
       </div>
-      <p style="margin:16px 0 0;padding-top:20px;border-top:1px solid #DCE2EA;font-size:14px;color:#4A5068">{{ t.blog.origin }} <a href="{{ post.source }}" target="_blank" rel="noopener noreferrer" style="color:#456794;font-weight:600">Medium</a></p>
+      <p style="margin:16px 0 0;padding-top:20px;border-top:1px solid #DCE2EA;font-size:14px;color:#4A5068">{{ t.blog.origin }} <a href="{{ post.source }}" target="_blank" rel="noopener noreferrer" style="color:#456794;font-weight:600">Medium<span class="ef-sr">{{ t.a11y.newTab }}</span></a></p>
     </div>
   </article>
 </sc-if>
@@ -469,30 +472,30 @@ button,input,textarea{font-family:inherit}
       <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:24px;align-items:stretch">
         <li style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(28px,3vw,40px) clamp(22px,2.5vw,32px) 32px;border-radius:10px;background:#F4F6F9;border:1px solid #E6EAF0;box-shadow:0 2px 14px rgba(25,29,55,.06);text-align:center">
           <div style="position:relative;width:132px;height:132px;border-radius:50%;overflow:hidden;background:#E4E7EE;border:3px solid #FFFFFF;box-shadow:0 0 0 1px #A3B2C7">
-            <img src="assets/img/massil-lakehal.jpg" alt="Massil Lakehal" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0">
+            <img src="assets/img/massil-lakehal.jpg" alt="Massil Lakehal" width="400" height="400" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0">
           </div>
-          <h2 style="margin:6px 0 0;font-size:22px;font-weight:600;letter-spacing:-.01em;color:#191D37">Massil Lakehal PhD</h2>
+          <h2 style="margin:6px 0 0;font-size:22px;font-weight:600;letter-spacing:-.01em;color:#191D37">Massil Lakehal, PhD</h2>
           <p style="margin:0;font-size:14px;font-weight:600;color:#456794">{{ t.about.massilRole }}</p>
           <p style="margin:0;max-width:300px;font-size:15px;line-height:1.6;color:#2C3150;text-wrap:pretty">{{ t.about.massilBio }}</p>
-          <a href="https://www.linkedin.com/in/massil-lakehal-68ab63140/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Massil Lakehal" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid #DCE2EA;background:#FFFFFF;font-size:13px;font-weight:600;color:#456794" style-hover="background:#191D37;border-color:#191D37;color:#FFFFFF"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" aria-hidden="true" style="fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/massil-lakehal-68ab63140/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Massil Lakehal{{ t.a11y.newTab }}" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid #DCE2EA;background:#FFFFFF;font-size:13px;font-weight:600;color:#456794" style-hover="background:#191D37;border-color:#191D37;color:#FFFFFF"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" aria-hidden="true" style="fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
         </li>
         <li style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(28px,3vw,40px) clamp(22px,2.5vw,32px) 32px;border-radius:10px;background:#F4F6F9;border:1px solid #E6EAF0;box-shadow:0 2px 14px rgba(25,29,55,.06);text-align:center">
           <div style="position:relative;width:132px;height:132px;border-radius:50%;overflow:hidden;background:#E4E7EE;border:3px solid #FFFFFF;box-shadow:0 0 0 1px #A3B2C7">
-            <img src="assets/img/auteur-avatar.jpg" alt="Sofiane Medjkoune" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0">
+            <img src="assets/img/auteur-avatar.jpg" alt="Sofiane Medjkoune" width="400" height="400" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0">
           </div>
           <h2 style="margin:6px 0 0;font-size:22px;font-weight:600;letter-spacing:-.01em;color:#191D37">Sofiane Medjkoune</h2>
           <p style="margin:0;font-size:14px;font-weight:600;color:#456794">{{ t.about.sofianeRole }}</p>
           <p style="margin:0;max-width:300px;font-size:15px;line-height:1.6;color:#2C3150;text-wrap:pretty">{{ t.about.sofianeBio }}</p>
-          <a href="https://www.linkedin.com/in/sofiane-medjkoune/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Sofiane Medjkoune" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid #DCE2EA;background:#FFFFFF;font-size:13px;font-weight:600;color:#456794" style-hover="background:#191D37;border-color:#191D37;color:#FFFFFF"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" aria-hidden="true" style="fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/sofiane-medjkoune/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Sofiane Medjkoune{{ t.a11y.newTab }}" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid #DCE2EA;background:#FFFFFF;font-size:13px;font-weight:600;color:#456794" style-hover="background:#191D37;border-color:#191D37;color:#FFFFFF"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" aria-hidden="true" style="fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
         </li>
         <li style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(28px,3vw,40px) clamp(22px,2.5vw,32px) 32px;border-radius:10px;background:#F4F6F9;border:1px solid #E6EAF0;box-shadow:0 2px 14px rgba(25,29,55,.06);text-align:center">
           <div style="position:relative;width:132px;height:132px;border-radius:50%;overflow:hidden;background:#E4E7EE;border:3px solid #FFFFFF;box-shadow:0 0 0 1px #A3B2C7">
-            <img src="assets/img/nazime-lakehal.jpg" alt="Nazime Lakehal" style="position:absolute;top:0;left:-16.5%;width:223.7%;max-width:none;height:auto">
+            <img src="assets/img/nazime-lakehal.jpg" alt="Nazime Lakehal" width="400" height="400" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
           </div>
           <h2 style="margin:6px 0 0;font-size:22px;font-weight:600;letter-spacing:-.01em;color:#191D37">Nazime Lakehal</h2>
           <p style="margin:0;font-size:14px;font-weight:600;color:#456794">{{ t.about.nazimeRole }}</p>
           <p style="margin:0;max-width:300px;font-size:15px;line-height:1.6;color:#2C3150;text-wrap:pretty">{{ t.about.nazimeBio }}</p>
-          <a href="https://www.linkedin.com/in/nazime-koussaila-lakehal-2726ba139/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Nazime Lakehal" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid #DCE2EA;background:#FFFFFF;font-size:13px;font-weight:600;color:#456794" style-hover="background:#191D37;border-color:#191D37;color:#FFFFFF"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" aria-hidden="true" style="fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
+          <a href="https://www.linkedin.com/in/nazime-koussaila-lakehal-2726ba139/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn — Nazime Lakehal{{ t.a11y.newTab }}" style="margin-top:auto;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid #DCE2EA;background:#FFFFFF;font-size:13px;font-weight:600;color:#456794" style-hover="background:#191D37;border-color:#191D37;color:#FFFFFF"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" aria-hidden="true" style="fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>LinkedIn</a>
         </li>
       </ul>
     </div>
@@ -519,7 +522,7 @@ button,input,textarea{font-family:inherit}
   </section>
 </sc-if>
 
-<section id="contact" data-screen-label="Contact" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px);scroll-margin-top:76px">
+<section id="contact" class="ef-dark" data-screen-label="Contact" style="position:relative;overflow:hidden;background:#191D37;color:#FFFFFF;padding:clamp(72px,9vw,120px) clamp(20px,4vw,48px);scroll-margin-top:76px">
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(163,178,199,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(163,178,199,.06) 1px,transparent 1px);background-size:56px 56px;pointer-events:none"></div>
   <div style="position:relative;max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
     <div style="display:flex;flex-direction:column;gap:20px;max-width:640px">
@@ -527,9 +530,9 @@ button,input,textarea{font-family:inherit}
       <h2 style="margin:0;font-size:clamp(30px,4vw,52px);line-height:1.08;font-weight:600;letter-spacing:-.03em;text-wrap:balance">{{ t.cta.title }}</h2>
       <p style="margin:0;font-size:17px;line-height:1.65;color:#D3DAE5;text-wrap:pretty">{{ t.cta.lead }}</p>
     </div>
-    <div style="display:inline-flex;align-items:stretch;border-radius:999px;background:#FFFFFF;color:#191D37;overflow:hidden">
-      <a href="{{ mailHref }}" target="_top" sc-camel-on-click="{{ openMail }}" style="display:inline-flex;align-items:center;padding:18px 22px 18px 28px;font-size:16px;font-weight:600;color:#191D37" style-hover="color:#456794">contact@eidosflow.com</a>
-      <button type="button" class="ef-copy" data-copied="{{ copiedAttr }}" sc-camel-on-click="{{ copyMail }}" aria-label="{{ copyLabel }}" title="{{ copyLabel }}">
+    <div style="display:inline-flex;align-items:stretch;max-width:100%;border-radius:999px;background:#FFFFFF;color:#191D37;overflow:hidden">
+      <a href="{{ mailHref }}" target="_top" sc-camel-on-click="{{ openMail }}" data-umami-event="contact-email" style="display:inline-flex;align-items:center;min-width:0;padding:18px 22px 18px 28px;font-size:16px;font-weight:600;color:#191D37" style-hover="color:#456794">contact@eidosflow.com</a>
+      <button type="button" class="ef-copy" data-copied="{{ copiedAttr }}" data-umami-event="contact-copy" sc-camel-on-click="{{ copyMail }}" aria-label="{{ copyLabel }}" title="{{ copyLabel }}">
         <span class="ef-copy-ic" aria-hidden="true">
           <svg class="ef-copy-i1" width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"></path></svg>
           <svg class="ef-copy-i2" width="16" height="16" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
@@ -541,7 +544,7 @@ button,input,textarea{font-family:inherit}
 
 </main>
 
-<footer style="background:#12152A;color:#D3DAE5;border-top:1px solid rgba(163,178,199,.14)">
+<footer class="ef-dark" style="background:#12152A;color:#D3DAE5;border-top:1px solid rgba(163,178,199,.14)">
   <div style="max-width:1240px;margin:0 auto;padding:64px clamp(20px,4vw,48px) 32px;display:flex;flex-direction:column;gap:48px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px">
       <div style="display:flex;flex-direction:column;gap:16px">
@@ -557,10 +560,10 @@ button,input,textarea{font-family:inherit}
           <sc-for list="{{ social }}" as="s" hint-placeholder-count="3">
             <li>
               <sc-if value="{{ s.url }}" hint-placeholder-val="{{ false }}">
-                <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;color:#FFFFFF" style-hover="color:#A3B2C7"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" aria-hidden="true" style="fill:currentColor;flex:none"><path d="{{ s.icon }}"></path></svg>{{ s.label }}</a>
+                <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:10px;color:#FFFFFF" style-hover="color:#A3B2C7">{{ s.svg }}{{ s.label }}<span class="ef-sr">{{ t.a11y.newTab }}</span></a>
               </sc-if>
               <sc-if value="{{ s.inactive }}" hint-placeholder-val="{{ true }}">
-                <span aria-disabled="true" style="display:inline-flex;align-items:center;gap:10px;color:#A3B2C7"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" aria-hidden="true" style="fill:currentColor;flex:none"><path d="{{ s.icon }}"></path></svg>{{ s.label }}</span>
+                <span aria-disabled="true" style="display:inline-flex;align-items:center;gap:10px;color:#A3B2C7">{{ s.svg }}{{ s.label }}</span>
               </sc-if>
             </li>
           </sc-for>
@@ -568,8 +571,8 @@ button,input,textarea{font-family:inherit}
       </div>
     </div>
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:24px;border-top:1px solid rgba(163,178,199,.14);font-size:12.5px;color:#A3B2C7">
-      <span style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px"><span>© 2026 EidosFlow. {{ t.footer.rights }}</span><a href="{{ hrefs.legal }}" sc-camel-on-click="{{ go.legal }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.legal }}</a><a href="{{ hrefs.privacy }}" sc-camel-on-click="{{ go.privacy }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.privacy }}</a></span>
-      <a href="#" sc-camel-on-click="{{ toTop }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.top }}</a>
+      <span style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px"><span>© {{ year }} EidosFlow. {{ t.footer.rights }}</span><a href="{{ hrefs.legal }}" sc-camel-on-click="{{ go.legal }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.legal }}</a><a href="{{ hrefs.privacy }}" sc-camel-on-click="{{ go.privacy }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.privacy }}</a></span>
+      <a href="{{ here }}#main" sc-camel-on-click="{{ toTop }}" style="color:#A3B2C7" style-hover="color:#FFFFFF">{{ t.footer.top }}</a>
     </div>
   </div>
 </footer>
@@ -600,10 +603,10 @@ class Component extends DCLogic {
       ['ul', ['Build chatbots and Q&A tools to leverage internal data and documents', 'Generate content across formats and channels producing a steady flow of marketing and communication assets ranging from LinkedIn posts and blog articles to product brochures and client emails.', 'Automate customer support for faster responses', 'Summarize and synthesize mountains of documents']],
       ['p', 'At first, these initiatives feel transformative. Yet the excitement fades quickly, and teams begin to wonder: Is anyone actually using this tool? Did it really make our work faster or easier? What’s the business impact compared to the cost?'],
       ['p', 'That’s why being able to measure ROI, from day one, is not just a nice to have, it is the foundation of any successful GenAI initiative. Without it, projects risk being dismissed as expensive experiments rather than real transformation.'],
-      ['p', 'In this report, Google presents a global survey of enterprise adoption and value.'],
-      ['p', 'When it comes to proving whether financial and operational gains truly come from AI initiatives, many companies are still navigating in the dark. Even C-level leaders admit they struggle to connect GenAI investments with measurable outcomes. A Deloitte study found that 41% of organizations face challenges in quantifying the real impact of their AI projects a clear sign that ROI remains one of the biggest blind spots in adoption'],
-      ['p', 'Without ROI measurement, these questions are hard to answer. And that’s where projects lose momentum. McKinsey highlights this same principle: companies that define value metrics early are 3x more likely to scale GenAI successfully.'],
-      ['p', 'In this article, we’ll outline the key steps to effectively measure the ROI of a Generative AI project. In a following article, we’ll deep dive the technical side, showing how your teams can build the right tools and frameworks to track ROI in practice.'],
+      ['pl', 'In ', 'this report', 'https://cloud.google.com/resources/roi-of-generative-ai', ', Google presents a global survey of enterprise adoption and value.'],
+      ['pl', 'When it comes to proving whether financial and operational gains truly come from AI initiatives, many companies are still navigating in the dark. Even C-level leaders admit they struggle to connect GenAI investments with measurable outcomes. A ', 'Deloitte study', 'https://www.deloitte.com/content/dam/assets-zone3/us/en/docs/services/consulting/2024/us-state-of-gen-ai-q3.pdf#page=21', ' found that 41% of organizations face challenges in quantifying the real impact of their AI projects, a clear sign that ROI remains one of the biggest blind spots in adoption.'],
+      ['pl', 'Without ROI measurement, these questions are hard to answer. And that’s where projects lose momentum. ', 'McKinsey', 'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier', ' highlights this same principle: companies that define value metrics early are 3x more likely to scale GenAI successfully.'],
+      ['p', 'In this article, we’ll outline the key steps to effectively measure the ROI of a Generative AI project. In a following article, we’ll deep dive into the technical side, showing how your teams can build the right tools and frameworks to track ROI in practice.'],
       ['p', 'Before discussing the technical side such as model selection, APIs, architecture, we must start with the business alignment.'],
       ['h2', 'Step 1: Define business success criteria'],
       ['p', 'What strategic outcome is this project supposed to drive? (Efficiency, revenue, customer experience, innovation?) How do we measure it in terms the business already understands?'],
@@ -633,8 +636,8 @@ class Component extends DCLogic {
       ['h2', 'Conclusion'],
       ['p', 'Measuring the ROI of GenAI projects isn’t something you tack on at the end, it’s the starting point that turns exciting innovation into real, measurable business value.'],
       ['p', 'Remember the following steps:'],
-      ['ul', ['Start by defining your business success criteria: Define target outcomes and select the right indicators in terms businesses and decision makers understands.', 'Build the bridge from technical metrics to business outcomes: Make sure performance data supports the business story.', 'Deliver your ROI report to the right audience: Tailor the level of detail to each consumer (POs, C-levels…etc) ensures your metrics don’t just exist, but actually drive action.']],
-      ['p', 'But this is only half the picture. In the following article, we’ll dive into the technical side of ROI measurement, exploring how DI platforms (like Databricks or Vertex AI) can help you capture the right metrics, and how to bring them all together in a business-friendly Power BI dashboard.']
+      ['ul', ['Start by defining your business success criteria: Define target outcomes and select the right indicators in terms businesses and decision-makers understand.', 'Build the bridge from technical metrics to business outcomes: Make sure performance data supports the business story.', 'Deliver your ROI report to the right audience: Tailoring the level of detail to each consumer (POs, C-levels, etc.) ensures your metrics don’t just exist, but actually drive action.']],
+      ['p', 'But this is only half the picture. In the following article, we’ll dive into the technical side of ROI measurement, exploring how AI platforms (like Databricks or Vertex AI) can help you capture the right metrics, and how to bring them all together in a business-friendly Power BI dashboard.']
     ]
   }];
   static CLIENTS = [
@@ -665,6 +668,7 @@ class Component extends DCLogic {
   static T = {
     fr: {
       review: 'À valider',
+      a11y: { skip: 'Aller au contenu', mainNav: 'Navigation principale', newTab: ' (nouvel onglet)', menuOpen: 'Ouvrir le menu', menuClose: 'Fermer le menu', pause: 'Mettre en pause le défilement', play: 'Reprendre le défilement' },
       nav: { home: 'Accueil', capabilities: 'Savoir-faire', blog: 'Blog', about: 'À propos', contact: 'Contact', cta: 'Nous contacter' },
       home: {
         coverBtn: 'En savoir plus',
@@ -744,6 +748,7 @@ class Component extends DCLogic {
     },
     en: {
       review: 'To validate',
+      a11y: { skip: 'Skip to content', mainNav: 'Main navigation', newTab: ' (opens in a new tab)', menuOpen: 'Open menu', menuClose: 'Close menu', pause: 'Pause scrolling', play: 'Resume scrolling' },
       nav: { home: 'Home', capabilities: 'Capabilities', blog: 'Blog', about: 'About', contact: 'Contact', cta: 'Contact us' },
       home: {
         coverBtn: 'Learn more',
@@ -781,7 +786,7 @@ class Component extends DCLogic {
           { title: "Internal penetration test", sum: "We simulate an attacker already inside your network to measure how far they can go.", items: [{ t: "Testing of your ", b: "Active Directory", c: " environment" }, { t: "Internal network penetration testing: servers and services", b: "", c: "" }, { t: "Workstation security: privilege escalation, bypassing protections", b: "", c: "" }, { t: "Network segmentation and Wi-Fi security", b: "", c: "" }, { t: "Password strength: cracking session on recovered hashes", b: "", c: "" }, { t: "Scenarios tailored to your context: business-critical applications, sensitive data", b: "", c: "" }] },
           { title: "Application security", sum: "We assess the security of your web and mobile applications and APIs, before go-live or once in production.", items: [{ t: "Grey-box or white-box penetration testing", b: "", c: "" }, { t: "Source code analysis, static and dynamic", b: "", c: "" }, { t: "Architecture review", b: "", c: "" }, { t: "Configuration review: operating systems, databases, web servers", b: "", c: "" }] },
           { title: "SME cyber assessment", sum: "We assess your overall security posture across the tools you use every day.", items: [{ t: "Domain names and DNS with OVH or your provider, email protection against spoofing", b: "", c: "" }, { t: "Collaboration tools: Microsoft 365 or Google Workspace", b: "", c: "" }, { t: "Cloud environment management: Azure, AWS", b: "", c: "" }, { t: "Workstation management: updates, antivirus, encryption, admin rights", b: "", c: "" }, { t: "DevOps: GitHub or GitLab repositories, CI/CD pipelines, secrets management", b: "", c: "" }] },
-          { title: "Security Monitoring", sum: "We keep watch over your configurations to catch weaknesses as soon as they appear.", items: [{ t: "Recurring review of your configurations, with a weekly or monthly report", b: "", c: "" }, { t: "Monitoring of your Active Directory and cloud environments: OVH, AWS, Microsoft 365", b: "", c: "" }, { t: "Alert for any major or critical misconfiguration", b: "", c: "" }] }
+          { title: "Security monitoring", sum: "We keep watch over your configurations to catch weaknesses as soon as they appear.", items: [{ t: "Recurring review of your configurations, with a weekly or monthly report", b: "", c: "" }, { t: "Monitoring of your Active Directory and cloud environments: OVH, AWS, Microsoft 365", b: "", c: "" }, { t: "Alert for any major or critical misconfiguration", b: "", c: "" }] }
         ],
         methodLabel: 'Our approach', methodTitle: 'A single open door is enough.',
         methodText: 'A weak password, a forgotten server, an account with too many rights: an attack often starts with a very simple flaw. You still need to know where it is.',
@@ -812,9 +817,9 @@ class Component extends DCLogic {
         massilRole: 'Co-founder · Data Science & AI',
         massilBio: 'Over 10 years leading data and AI projects end to end, from architecture and modelling to business impact.',
         sofianeRole: 'Co-founder · Data and AI Strategy',
-        sofianeBio: 'Over 8 years in consulting, I have partnered with major clients to shape their data and AI strategy and deliver high-value products.',
+        sofianeBio: 'Over 8 years of consulting for major clients, shaping their data and AI strategy and delivering high-value products.',
         nazimeRole: 'Co-founder · Cybersecurity & Governance',
-        nazimeBio: 'Over 8 years in cybersecurity consulting, I have helped major clients assess and strengthen their security through penetration testing, cloud security reviews, architecture audits and GRC assessments.'
+        nazimeBio: 'Over 8 years of cybersecurity consulting for major clients: penetration testing, cloud security reviews, architecture audits and GRC assessments.'
       },
       cta: { copy: 'Copy address', copied: 'Address copied ✓', subject: 'Request for a discussion — advisory project', title: 'Let’s talk about your project.', lead: 'Tell us about your need in a few lines and we’ll get back to you to discuss it.' },
       footer: { follow: 'Follow us', rights: 'All rights reserved.', top: 'Back to top', legal: 'Legal notice', privacy: 'Privacy' },
@@ -823,26 +828,87 @@ class Component extends DCLogic {
     }
   };
 
-  state = { lang: 'fr', page: 'home', w: 1280, menuOpen: false, domain: null, dropdown: false, post: null };
+  state = { lang: 'fr', page: 'home', w: 1280, menuOpen: false, domain: null, dropdown: false, post: null, marqueePaused: false };
   canvasRef = React.createRef();
 
+  // Racine du site (ex. /Eidosflow/) : donnée par <base href> dans les pages générées par build.mjs
+  static basePath() {
+    const b = document.querySelector('base');
+    if (b) return new URL(b.href).pathname;
+    return window.location.pathname.replace(/[^/]*$/, '');
+  }
+  static reduceMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
   componentDidMount() {
-    this.readHash();
-    this._hash = () => this.readHash();
+    this.base = Component.basePath();
+    this.readPath();
+    this._pop = () => this.readPath();
+    this._hash = () => { if (/^#\/(fr|en)\b/.test(window.location.hash)) this.readPath(); };
     this._resize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('popstate', this._pop);
     window.addEventListener('hashchange', this._hash);
     window.addEventListener('resize', this._resize);
     this._resize();
     if (!window.EIDOSFLOW_CONFIG) setTimeout(() => this.forceUpdate(), 400);
     this.startCanvas();
     this.watchSteps();
-    this._key = (e) => { if (e.key === 'Escape' && this.state.dropdown) this.setState({ dropdown: false }); };
+    this.updateHead();
+    // Échap ferme le menu « Savoir-faire » ou le menu mobile et rend le focus au bouton qui l’a ouvert
+    this._key = (e) => {
+      if (e.key !== 'Escape') return;
+      if (this.state.dropdown) { this.setState({ dropdown: false }); const b = document.getElementById('ef-dd-btn'); if (b) b.focus(); }
+      if (this.state.menuOpen) { this.setState({ menuOpen: false }); const b = document.getElementById('ef-menu-btn'); if (b) b.focus(); }
+    };
     window.addEventListener('keydown', this._key);
+    // Clic en dehors de l’en-tête : on referme les menus
+    this._outside = (e) => {
+      if (!this.state.dropdown && !this.state.menuOpen) return;
+      const hd = document.querySelector('header');
+      if (hd && !hd.contains(e.target)) this.setState({ dropdown: false, menuOpen: false });
+    };
+    document.addEventListener('pointerdown', this._outside);
+  }
+  // Titre de l’onglet, langue, description, URL canonique et aperçus de partage, page par page (voir seo.js)
+  seoKey() {
+    const { page, domain, post } = this.state;
+    if (page === 'capabilities' && domain) return domain;
+    if (page === 'blog' && post) return 'post:' + post;
+    return page;
+  }
+  updateHead() {
+    const { lang } = this.state;
+    const S = window.EIDOSFLOW_SEO;
+    document.documentElement.lang = lang;
+    if (!S) return;
+    const m = (S.pages[lang] || {})[this.seoKey()] || (S.pages[lang] || {}).home;
+    if (!m) return;
+    if (document.title !== m.title) document.title = m.title;
+    const url = S.site.origin + this.currentPath();
+    const set = (sel, attr, val) => { const el = document.head.querySelector(sel); if (el && val != null) el.setAttribute(attr, val); };
+    set('meta[name="description"]', 'content', m.description);
+    set('link[rel="canonical"]', 'href', url);
+    set('meta[property="og:title"]', 'content', m.title);
+    set('meta[property="og:description"]', 'content', m.description);
+    set('meta[property="og:url"]', 'content', url);
+    set('meta[name="twitter:title"]', 'content', m.title);
+    set('meta[name="twitter:description"]', 'content', m.description);
+    // Page introuvable (404.html) : elle reste exclue de Google tant qu’on n’a pas changé de page
+    const notFound = document.documentElement.hasAttribute('data-not-found') && !this._navigated;
+    set('meta[name="robots"]', 'content', m.noindex || notFound ? 'noindex, follow' : 'index, follow');
+    ['fr', 'en'].forEach((l) => set('link[rel="alternate"][hreflang="' + l + '"]', 'href', S.site.origin + this.href(this.state.page, l, this.state.page === 'blog' ? this.state.post : this.state.domain)));
+  }
+  currentPath() {
+    const { page, lang, domain, post } = this.state;
+    return this.href(page, lang, page === 'blog' ? post : domain);
   }
   startCanvas() {
-    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Animation du fond de la page d’accueil : elle ne tourne que lorsque le canvas est visible à l’écran,
+    // et se dessine une seule fois (image fixe) si l’utilisateur a demandé à réduire les animations.
+    const reduce = Component.reduceMotion();
     const t0 = performance.now();
-    let cv = null, ctx = null, W = 0, H = 0;
+    let cv = null, ctx = null, W = 0, H = 0, visible = true, io = null;
     const size = () => {
       const r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
       W = r.width; H = r.height; cv.width = Math.max(1, W * d); cv.height = Math.max(1, H * d);
@@ -873,19 +939,33 @@ class Component extends DCLogic {
       }
     };
     const loop = (now) => {
+      this._raf = null;
+      if (this._dead) return;
       const el = this.canvasRef.current;
-      if (el) {
-        if (el !== cv) { cv = el; ctx = cv.getContext('2d'); size(); }
-        const r = cv.getBoundingClientRect();
-        if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1) size();
-        draw(reduce ? 6 : (now - t0) / 1000);
-      } else cv = null;
-      if (!this._dead) this._raf = requestAnimationFrame(loop);
+      if (!el) { cv = null; if (io) { io.disconnect(); io = null; } return; } // pas sur l’accueil : on s’arrête
+      if (el !== cv) {
+        cv = el; ctx = cv.getContext('2d'); size();
+        if (io) io.disconnect();
+        if (typeof IntersectionObserver !== 'undefined') {
+          io = new IntersectionObserver((en) => { visible = en[0].isIntersecting; if (visible && !reduce) this.kickCanvas(); });
+          io.observe(cv);
+        }
+      }
+      const r = cv.getBoundingClientRect();
+      if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1) size();
+      draw(reduce ? 6 : (now - t0) / 1000);
+      if (!reduce && visible) this._raf = requestAnimationFrame(loop);
     };
-    this._raf = requestAnimationFrame(loop);
+    this.kickCanvas = () => { if (!this._raf && !this._dead) this._raf = requestAnimationFrame(loop); };
+    this._resizeCanvas = () => { if (reduce) this.kickCanvas(); };
+    window.addEventListener('resize', this._resizeCanvas);
+    this.kickCanvas();
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     this.watchSteps();
+    if (this.kickCanvas && this.state.page === 'home') this.kickCanvas();
+    const s = this.state;
+    if (!prevState || prevState.lang !== s.lang || prevState.page !== s.page || prevState.domain !== s.domain || prevState.post !== s.post) this.updateHead();
   }
   watchSteps() {
     // La section « Notre méthode » s'anime quand elle arrive à l'écran
@@ -909,39 +989,62 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     if (this._stepsObs) this._stepsObs.disconnect();
-    this._dead = true; cancelAnimationFrame(this._raf); window.removeEventListener('keydown', this._key);
+    this._dead = true; if (this._raf) cancelAnimationFrame(this._raf); window.removeEventListener('keydown', this._key);
+    window.removeEventListener('popstate', this._pop);
     window.removeEventListener('hashchange', this._hash);
     window.removeEventListener('resize', this._resize);
+    window.removeEventListener('resize', this._resizeCanvas);
+    document.removeEventListener('pointerdown', this._outside);
   }
-  readHash() {
-    const m = (window.location.hash || '').match(/^#\/(fr|en)\/?([\w-]*)\/?([\w-]*)/);
-    if (!m) return;
-    const lang = m[1];
+  // Lecture de l’adresse : /Eidosflow/fr/savoir-faire/cybersecurite/ -> langue, page, domaine.
+  // Les anciens liens en #/fr/… (partagés avant le passage aux vraies adresses) sont convertis.
+  readPath() {
+    const legacy = (window.location.hash || '').match(/^#\/(fr|en)\/?([\w-]*)\/?([\w-]*)/);
+    let parts;
+    if (legacy) parts = [legacy[1], legacy[2], legacy[3]];
+    else {
+      const base = this.base || '/';
+      let p = window.location.pathname;
+      p = p.indexOf(base) === 0 ? p.slice(base.length) : p.replace(/^\//, '');
+      parts = p.split('/').filter(Boolean).map((x) => decodeURIComponent(x));
+    }
+    const lang = parts[0] === 'en' ? 'en' : 'fr';
     const slugs = Component.SLUGS[lang];
-    const page = Object.keys(slugs).find((k) => slugs[k] === m[2]) || 'home';
+    const known = parts[0] === 'fr' || parts[0] === 'en';
+    const page = known ? (Object.keys(slugs).find((k) => slugs[k] === (parts[1] || '')) || 'home') : 'home';
     const ds = Component.DSLUG[lang];
-    const domain = Object.keys(ds).find((k) => ds[k] === m[3]) || null;
-    const post = page === 'blog' && Component.POSTS.some((p) => p.slug === m[3]) ? m[3] : null;
-    this.setState({ lang, page, domain, post, menuOpen: false, dropdown: false });
+    const domain = page === 'capabilities' ? (Object.keys(ds).find((k) => ds[k] === parts[2]) || null) : null;
+    const post = page === 'blog' && Component.POSTS.some((x) => x.slug === parts[2]) ? parts[2] : null;
+    this.setState({ lang, page, domain, post, menuOpen: false, dropdown: false }, () => {
+      if (legacy) history.replaceState(null, '', this.currentPath());
+    });
   }
+  // Adresse d’une page : base + langue + slug(s), avec une barre oblique finale (dossier servi par GitHub Pages)
   href(page, lang, domain) {
     const l = lang || this.state.lang;
-    let h = '#/' + l + '/' + Component.SLUGS[l][page];
-    if (page === 'capabilities') { const dd = domain === undefined ? (lang ? this.state.domain : null) : domain; if (dd) h += '/' + Component.DSLUG[l][dd]; }
-    if (page === 'blog' && domain) h += '/' + domain;
-    return h;
+    const base = this.base || Component.basePath();
+    const seg = [l];
+    if (Component.SLUGS[l][page]) seg.push(Component.SLUGS[l][page]);
+    if (page === 'capabilities') { const dd = domain === undefined ? (lang ? this.state.domain : null) : domain; if (dd) seg.push(Component.DSLUG[l][dd]); }
+    if (page === 'blog' && domain) seg.push(domain);
+    return base + seg.join('/') + '/';
   }
   nav(page, lang, domain) {
     return (e) => {
+      // Ctrl/Cmd/Maj + clic ou clic molette : on laisse le navigateur ouvrir un nouvel onglet
+      if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1)) return;
       if (e) e.preventDefault();
       const l = lang || this.state.lang;
       const isBlog = page === 'blog';
       const post = isBlog ? (domain || (lang && this.state.page === 'blog' ? this.state.post : null)) : null;
       const d = isBlog ? this.state.domain : (domain === undefined ? (lang ? this.state.domain : null) : domain);
       const h = this.href(page, l, isBlog ? post : (page === 'capabilities' ? d : undefined));
-      if (window.location.hash !== h) history.pushState(null, '', h);
+      if (window.location.pathname + window.location.hash !== h) history.pushState(null, '', h);
+      this._navigated = true;
       this.setState({ page, lang: l, domain: d, post, menuOpen: false, dropdown: false });
       window.scrollTo(0, 0);
+      // Le focus revient en haut du contenu, pour que les lecteurs d’écran annoncent la nouvelle page
+      const main = document.getElementById('main'); if (main) main.focus({ preventScroll: true });
     };
   }
   renderVals() {
@@ -951,7 +1054,18 @@ class Component extends DCLogic {
     const showReview = this.props.showReview ?? true;
     const cfg = window.EIDOSFLOW_CONFIG || {};
     const pages = ['capabilities', 'about', 'blog'];
-    const jumpTo = (id) => (e) => { if (e) e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' }); };
+    const reduceM = Component.reduceMotion();
+    const scrollBehavior = reduceM ? 'auto' : 'smooth';
+    const here = this.currentPath();
+    // Défilement vers une section de la page, sans modifier l’adresse ; le focus suit (clavier, lecteurs d’écran)
+    const jumpTo = (id) => (e) => {
+      if (e) e.preventDefault();
+      const el = document.getElementById(id);
+      if (!el) return;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 76, behavior: scrollBehavior });
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    };
     const C = t.cap, soonRow = [{ isSoon: true, text: C.soonShort }];
     const item = (x) => ({ isItem: true, strong: x.strong || '', text: x.text });
     const D = {
@@ -963,8 +1077,8 @@ class Component extends DCLogic {
     const dom = { ...(D[cur] || D.cyber), heroLead: cur === 'cyber' ? t.cyber.lead : (D[cur] || D.cyber).lead };
     const isCyber = page === 'capabilities' && cur === 'cyber';
     const onCap = page === 'capabilities';
-    const hov = this.state.hoverLogo, paused = hov != null;
-    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hov = this.state.hoverLogo, paused = hov != null || this.state.marqueePaused;
+    const reduce = reduceM;
     const h = React.createElement;
     const tile = (c, i) => {
       const on = hov === i;
@@ -972,7 +1086,7 @@ class Component extends DCLogic {
         key: i, onMouseEnter: () => this.setState({ hoverLogo: i }), onMouseLeave: () => this.setState({ hoverLogo: null }),
         'aria-hidden': i >= Component.CLIENTS.length ? 'true' : undefined,
         style: { flex: 'none', width: 200, height: 104, margin: '0 8px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, background: on ? '#FFFFFF' : '#456794', border: '1px solid ' + (on ? '#FFFFFF' : 'rgba(163,178,199,.45)'), boxShadow: on ? '0 12px 32px -12px rgba(0,0,0,.6)' : '0 8px 24px -14px rgba(0,0,0,.7)', transition: 'background .25s, border-color .25s', cursor: 'default' }
-      }, h('img', { src: (window.__resources && window.__resources['client_' + c[0].replace(/-/g, '_')]) || ('assets/clients/' + c[0] + '.png'), alt: i >= Component.CLIENTS.length ? '' : c[1], draggable: false, style: { maxWidth: 148, maxHeight: c[0] === 'pernod-ricard' || c[0] === 'euipo' ? 56 : 40, width: 'auto', height: 'auto', filter: on ? 'none' : 'brightness(0) invert(1)', opacity: 1, transition: 'filter .25s, opacity .25s' } }));
+      }, h('img', { src: 'assets/clients/' + c[0] + '.webp', alt: i >= Component.CLIENTS.length ? '' : c[1], draggable: false, loading: 'lazy', decoding: 'async', style: { maxWidth: 148, maxHeight: c[0] === 'pernod-ricard' || c[0] === 'euipo' ? 56 : 40, width: 'auto', height: 'auto', filter: on ? 'none' : 'brightness(0) invert(1)', opacity: 1, transition: 'filter .25s, opacity .25s' } }));
     };
     const list = reduce ? Component.CLIENTS : [...Component.CLIENTS, ...Component.CLIENTS];
     if (!this._tex) this._tex = h('div', { 'aria-hidden': 'true', style: { position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(163,178,199,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(163,178,199,.07) 1px, transparent 1px)', backgroundSize: '56px 56px', animation: reduce ? 'none' : 'ef-grid 14s linear infinite', WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 50% 50%, #000 30%, transparent 85%)', maskImage: 'radial-gradient(ellipse 80% 90% at 50% 50%, #000 30%, transparent 85%)' } });
@@ -982,22 +1096,18 @@ class Component extends DCLogic {
     const post = {
       title: P0.title, author: P0.author, role: P0.role[lang], category: P0.category[lang], date: P0.date[lang], read: P0.read[lang], excerpt: P0.excerpt[lang], source: P0.source,
       href: this.href('blog', lang, P0.slug), open: this.nav('blog', null, P0.slug), showLangNote: lang === 'fr',
-      blocks: P0.blocks.map(([k, v]) => ({ isP: k === 'p', isH2: k === 'h2', isH3: k === 'h3', isEx: k === 'ex', isList: k === 'ul', text: typeof v === 'string' ? v : '', items: Array.isArray(v) ? v : [] }))
+      // 'pl' = paragraphe avec un lien : ['pl', texte avant, texte du lien, adresse, texte après]
+      blocks: P0.blocks.map(([k, v, a, b, c]) => ({ isP: k === 'p', isPL: k === 'pl', isH2: k === 'h2', isH3: k === 'h3', isEx: k === 'ex', isList: k === 'ul', text: typeof v === 'string' ? v : '', items: Array.isArray(v) ? v : [], before: k === 'pl' ? v : '', link: a || '', href: b || '', after: c || '' }))
     };
     const blogPost = page === 'blog' && !!this.state.post, blogList = page === 'blog' && !this.state.post;
     const capOverview = page === 'capabilities' && !cur, capDetail = page === 'capabilities' && !!cur;
     const overviewCards = ['cyber', 'data', 'ai'].map((k, i) => ({ n: String(i + 1).padStart(2, '0'), title: D[k].title, hint: D[k].hint, lead: D[k].lead, href: this.href('capabilities', lang, k), go: this.nav('capabilities', lang, k), ready: k === 'cyber', soon: k !== 'cyber' }));
-    const domainLinks = ['cyber', 'data', 'ai'].map((k) => ({ label: D[k].title, note: k === 'cyber' ? '' : C.soonShort, href: this.href('capabilities', lang, k), go: this.nav('capabilities', lang, k), fg: onCap && k === cur ? '#FFFFFF' : '#D3DAE5', bg: onCap && k === cur ? 'rgba(163,178,199,.12)' : 'transparent' }));
+    const domainLinks = ['cyber', 'data', 'ai'].map((k) => ({ label: D[k].title, note: k === 'cyber' ? '' : C.soonShort, current: onCap && k === cur ? 'page' : undefined, href: this.href('capabilities', lang, k), go: this.nav('capabilities', lang, k), fg: onCap && k === cur ? '#FFFFFF' : '#D3DAE5', bg: onCap && k === cur ? 'rgba(163,178,199,.12)' : 'transparent' }));
     const domains = ['cyber', 'data', 'ai'].map((k) => {
       const on = k === cur;
       return { title: D[k].title, hint: D[k].hint, active: on, bg: on ? '#191D37' : '#FFFFFF', fg: on ? '#FFFFFF' : '#191D37', border: on ? '#191D37' : '#DCE2EA', accent: on ? '#A3B2C7' : '#456794', sub: on ? '#A3B2C7' : '#4A5068', select: () => this.setState({ domain: k }) };
     });
-    const goContact = (e) => {
-      if (e) e.preventDefault();
-      this.setState({ menuOpen: false });
-      const el = document.getElementById('contact');
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
-    };
+    const goContact = (e) => { this.setState({ menuOpen: false }); jumpTo('contact')(e); };
     const hrefs = {}, go = {};
     ['home', ...pages].forEach((p) => { hrefs[p] = this.href(p); go[p] = this.nav(p); });
     if (!this._cv) this._cv = React.createElement('canvas', { ref: this.canvasRef, 'aria-hidden': 'true', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, #000 35%)', maskImage: 'linear-gradient(180deg, transparent 0%, #000 35%)' } });
@@ -1009,8 +1119,22 @@ class Component extends DCLogic {
     const offers = t.svc.offers.map((o, i) => ({ ...o, n: String(i + 1).padStart(2, '0'), showTag: !!o.review && showReview }));
     const social = (cfg.social || [
       { key: 'linkedin', label: 'LinkedIn', url: 'https://www.linkedin.com/company/eidosflow/' }
-    ]).filter((s) => s && s.label).map((s) => ({ label: s.label, url: s.url || null, inactive: !s.url, icon: s.icon || Component.ICONS[s.key] || '' }));
+    ]).filter((s) => s && s.label).map((s) => {
+      const icon = s.icon || Component.ICONS[s.key] || '';
+      // L’icône est créée en JS (et non dans le gabarit) pour éviter l’erreur « <path d="{{ s.icon }}"> » au chargement
+      const svg = icon ? h('svg', { viewBox: '0 0 24 24', width: 16, height: 16, 'aria-hidden': 'true', style: { fill: 'currentColor', flex: 'none' } }, h('path', { d: icon })) : null;
+      return { label: s.label, url: s.url || null, inactive: !s.url, svg };
+    });
+    const icPause = h('svg', { width: 12, height: 12, viewBox: '0 0 12 12', 'aria-hidden': 'true' }, h('path', { d: 'M3 2h2v8H3zM7 2h2v8H7z', fill: 'currentColor' }));
+    const icPlay = h('svg', { width: 12, height: 12, viewBox: '0 0 12 12', 'aria-hidden': 'true' }, h('path', { d: 'M3 1.5v9l7.5-4.5z', fill: 'currentColor' }));
     return {
+      here, year: new Date().getFullYear(),
+      skipToMain: (e) => { e.preventDefault(); const m = document.getElementById('main'); if (m) { m.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: scrollBehavior }); } },
+      toFirm: jumpTo('le-cabinet'),
+      menuLabel: menuOpen ? t.a11y.menuClose : t.a11y.menuOpen,
+      canPauseMarquee: !reduce, marqueePaused: this.state.marqueePaused ? 'true' : 'false',
+      marqueeLabel: this.state.marqueePaused ? t.a11y.play : t.a11y.pause, marqueeIcon: this.state.marqueePaused ? icPlay : icPause,
+      toggleMarquee: () => this.setState((s) => ({ marqueePaused: !s.marqueePaused })),
       t, pos, pg, hrefs, go, showLegal, legalPage, dom, isCyber, notCyber: !isCyber, cyToOffers: jumpTo('cy-offres'), domainLinks, capOverview, capDetail, overviewCards, post, blogPost, blogList, logoMarquee, refTexture: this._tex,
       mailHref: 'mailto:contact@eidosflow.com?subject=' + encodeURIComponent(t.cta.subject),
       openMail: (e) => {
@@ -1029,18 +1153,23 @@ class Component extends DCLogic {
         if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('contact@eidosflow.com').then(done, fallback); else fallback();
       },
       dropdown: this.state.dropdown, capBc: onCap ? '#A3B2C7' : 'transparent', caretRot: this.state.dropdown ? 'rotate(180deg)' : 'none',
-      ddOpen: () => this.setState({ dropdown: true }), ddClose: () => this.setState({ dropdown: false }), ddToggle: () => this.setState((st) => ({ dropdown: !st.dropdown })), showReview, offers, social, goContact,
+      // Menu « Savoir-faire » : ouverture au survol ; le clic qui suit immédiatement un survol ne le referme pas
+      ddOpen: () => { if (!this.state.dropdown) { this._ddHoverAt = Date.now(); this.setState({ dropdown: true }); } },
+      ddClose: () => this.setState({ dropdown: false }),
+      ddToggle: () => { if (this.state.dropdown && Date.now() - (this._ddHoverAt || 0) < 600) return; this.setState((st) => ({ dropdown: !st.dropdown })); },
+      ddBlur: (e) => { if (this.state.dropdown && !e.currentTarget.contains(e.relatedTarget)) this.setState({ dropdown: false }); },
+      showReview, offers, social, goContact,
       coverBg: this._cv,
       homeHref: hrefs.home, goHome: go.home,
       isDesktop: !isMobile, isMobile, menuOpen, showMobileMenu: isMobile && menuOpen,
       toggleMenu: () => this.setState((s) => ({ menuOpen: !s.menuOpen })),
-      navItems: [...pages.filter((p) => p !== 'capabilities').map((p) => ({ label: t.nav[p], href: hrefs[p], go: go[p], bc: page === p ? '#A3B2C7' : 'transparent' })), { label: t.nav.contact, href: '#contact', go: goContact, bc: 'transparent' }],
+      navItems: [...pages.filter((p) => p !== 'capabilities').map((p) => ({ label: t.nav[p], href: hrefs[p], go: go[p], current: page === p ? 'page' : undefined, bc: page === p ? '#A3B2C7' : 'transparent' })), { label: t.nav.contact, href: here + '#contact', go: goContact, bc: 'transparent' }],
       mobileItems: [
-        { label: t.nav.home, href: hrefs.home, go: go.home, indent: '0', size: '18px', fg: '#FFFFFF' },
-        { label: t.nav.capabilities, href: hrefs.capabilities, go: go.capabilities, indent: '0', size: '18px', fg: '#FFFFFF' },
-        ...domainLinks.map((d) => ({ label: d.label, href: d.href, go: d.go, indent: '18px', size: '15.5px', fg: '#A3B2C7' })),
-        ...pages.filter((p) => p !== 'capabilities').map((p) => ({ label: t.nav[p], href: hrefs[p], go: go[p], indent: '0', size: '18px', fg: '#FFFFFF' })),
-        { label: t.nav.contact, href: '#contact', go: goContact, indent: '0', size: '18px', fg: '#FFFFFF' }
+        { label: t.nav.home, href: hrefs.home, go: go.home, current: page === 'home' ? 'page' : undefined, note: '', indent: '0', size: '18px', fg: '#FFFFFF' },
+        { label: t.nav.capabilities, href: hrefs.capabilities, go: go.capabilities, current: onCap && !cur ? 'page' : undefined, note: '', indent: '0', size: '18px', fg: '#FFFFFF' },
+        ...domainLinks.map((d) => ({ label: d.label, href: d.href, go: d.go, current: d.current, note: d.note, indent: '18px', size: '15.5px', fg: '#A3B2C7' })),
+        ...pages.filter((p) => p !== 'capabilities').map((p) => ({ label: t.nav[p], href: hrefs[p], go: go[p], current: page === p ? 'page' : undefined, note: '', indent: '0', size: '18px', fg: '#FFFFFF' })),
+        { label: t.nav.contact, href: here + '#contact', go: goContact, note: '', indent: '0', size: '18px', fg: '#FFFFFF' }
       ],
       isFr: lang === 'fr', isEn: lang === 'en',
       frBg: lang === 'fr' ? '#FFFFFF' : 'transparent', frFg: lang === 'fr' ? '#191D37' : '#E4E8EF',
@@ -1048,7 +1177,7 @@ class Component extends DCLogic {
       setFr: this.nav(page, 'fr'), setEn: this.nav(page, 'en'),
       toggleLang: this.nav(page, lang === 'fr' ? 'en' : 'fr'), langLabel: lang === 'fr' ? 'FR' : 'EN', langC1: lang === 'fr' ? 'F' : 'E', langC2: lang === 'fr' ? 'R' : 'N', langAnim: 'ef-lang-' + lang,
       langAria: lang === 'fr' ? 'Switch to English' : 'Passer en français',
-      toTop: (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+      toTop: (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: scrollBehavior }); const m = document.getElementById('main'); if (m) m.focus({ preventScroll: true }); }
     };
   }
 }
