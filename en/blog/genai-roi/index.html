@@ -72,9 +72,6 @@ button,input,textarea{font-family:inherit}
 .ef-skip:focus{transform:none}
 .ef-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 #main:focus{outline:none}
-/* Bouton pause du défilement des logos */
-.ef-pause{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;margin-top:6px;padding:8px 14px;border-radius:999px;border:1px solid rgba(163,178,199,.35);background:transparent;color:#D3DAE5;font-size:13px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s}
-.ef-pause:hover{border-color:#A3B2C7;background:rgba(163,178,199,.12)}
 /* Bouton « Copier » du contact — interaction « Copy Hash » (amicro.dev/buttons/btn-4, MIT) */
 .ef-copy{position:relative;display:flex;align-items:center;justify-content:center;min-width:58px;padding:0 20px 0 18px;border:0;border-left:1px solid #DCE2EA;background:#FFFFFF;color:#191D37;cursor:pointer;transition:background-color .2s ease,padding .32s cubic-bezier(.34,1.56,.64,1)}
 .ef-copy:hover{background:#F4F6F9;padding:0 24px 0 22px}
@@ -246,9 +243,6 @@ button,input,textarea{font-family:inherit}
       <p style="margin:0;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3B2C7"><span style="width:26px;height:3px;background:#A3B2C7;transform:skewX(-22deg)"></span>{{ t.home.refEyebrow }}</p>
       <h2 style="margin:0;font-size:clamp(30px,3.8vw,48px);line-height:1.1;font-weight:600;letter-spacing:-.03em">{{ t.home.refTitle }}</h2>
       <p style="margin:0;max-width:640px;font-size:16px;line-height:1.6;color:#D3DAE5">{{ t.home.refSub }}</p>
-      <sc-if value="{{ canPauseMarquee }}" hint-placeholder-val="{{ true }}">
-        <button type="button" class="ef-pause" sc-camel-on-click="{{ toggleMarquee }}" aria-pressed="{{ marqueePaused }}">{{ marqueeIcon }}{{ marqueeLabel }}</button>
-      </sc-if>
     </div>
     {{ logoMarquee }}
   </section>
@@ -689,7 +683,7 @@ class Component extends DCLogic {
   static T = {
     fr: {
       review: 'À valider',
-      a11y: { skip: 'Aller au contenu', mainNav: 'Navigation principale', newTab: ' (nouvel onglet)', menuOpen: 'Ouvrir le menu', menuClose: 'Fermer le menu', pause: 'Mettre en pause le défilement', play: 'Reprendre le défilement' },
+      a11y: { skip: 'Aller au contenu', mainNav: 'Navigation principale', newTab: ' (nouvel onglet)', menuOpen: 'Ouvrir le menu', menuClose: 'Fermer le menu' },
       nav: { home: 'Accueil', capabilities: 'Savoir-faire', blog: 'Blog', about: 'À propos', contact: 'Contact', cta: 'Nous contacter' },
       home: {
         coverBtn: 'En savoir plus',
@@ -769,7 +763,7 @@ class Component extends DCLogic {
     },
     en: {
       review: 'To validate',
-      a11y: { skip: 'Skip to content', mainNav: 'Main navigation', newTab: ' (opens in a new tab)', menuOpen: 'Open menu', menuClose: 'Close menu', pause: 'Pause scrolling', play: 'Resume scrolling' },
+      a11y: { skip: 'Skip to content', mainNav: 'Main navigation', newTab: ' (opens in a new tab)', menuOpen: 'Open menu', menuClose: 'Close menu' },
       nav: { home: 'Home', capabilities: 'Capabilities', blog: 'Blog', about: 'About', contact: 'Contact', cta: 'Contact us' },
       home: {
         coverBtn: 'Learn more',
@@ -849,7 +843,7 @@ class Component extends DCLogic {
     }
   };
 
-  state = { lang: 'fr', page: 'home', w: 1280, menuOpen: false, domain: null, dropdown: false, post: null, marqueePaused: false };
+  state = { lang: 'fr', page: 'home', w: 1280, menuOpen: false, domain: null, dropdown: false, post: null };
   canvasRef = React.createRef();
 
   // Racine du site (ex. /Eidosflow/) : donnée par <base href> dans les pages générées par build.mjs
@@ -1098,7 +1092,7 @@ class Component extends DCLogic {
     const dom = { ...(D[cur] || D.cyber), heroLead: cur === 'cyber' ? t.cyber.lead : (D[cur] || D.cyber).lead };
     const isCyber = page === 'capabilities' && cur === 'cyber';
     const onCap = page === 'capabilities';
-    const hov = this.state.hoverLogo, paused = hov != null || this.state.marqueePaused;
+    const hov = this.state.hoverLogo, paused = hov != null;
     const reduce = reduceM;
     const h = React.createElement;
     const tile = (c, i) => {
@@ -1146,16 +1140,11 @@ class Component extends DCLogic {
       const svg = icon ? h('svg', { viewBox: '0 0 24 24', width: 16, height: 16, 'aria-hidden': 'true', style: { fill: 'currentColor', flex: 'none' } }, h('path', { d: icon })) : null;
       return { label: s.label, url: s.url || null, inactive: !s.url, svg };
     });
-    const icPause = h('svg', { width: 12, height: 12, viewBox: '0 0 12 12', 'aria-hidden': 'true' }, h('path', { d: 'M3 2h2v8H3zM7 2h2v8H7z', fill: 'currentColor' }));
-    const icPlay = h('svg', { width: 12, height: 12, viewBox: '0 0 12 12', 'aria-hidden': 'true' }, h('path', { d: 'M3 1.5v9l7.5-4.5z', fill: 'currentColor' }));
     return {
       here, year: new Date().getFullYear(),
       skipToMain: (e) => { e.preventDefault(); const m = document.getElementById('main'); if (m) { m.focus({ preventScroll: true }); window.scrollTo({ top: 0, behavior: scrollBehavior }); } },
       toFirm: jumpTo('le-cabinet'),
       menuLabel: menuOpen ? t.a11y.menuClose : t.a11y.menuOpen,
-      canPauseMarquee: !reduce, marqueePaused: this.state.marqueePaused ? 'true' : 'false',
-      marqueeLabel: this.state.marqueePaused ? t.a11y.play : t.a11y.pause, marqueeIcon: this.state.marqueePaused ? icPlay : icPause,
-      toggleMarquee: () => this.setState((s) => ({ marqueePaused: !s.marqueePaused })),
       t, pos, pg, hrefs, go, showLegal, legalPage, dom, isCyber, notCyber: !isCyber, cyToOffers: jumpTo('cy-offres'), domainLinks, capOverview, capDetail, overviewCards, post, blogPost, blogList, logoMarquee, refTexture: this._tex,
       mailHref: 'mailto:contact@eidosflow.com?subject=' + encodeURIComponent(t.cta.subject),
       openMail: (e) => {
